@@ -1,0 +1,4 @@
+.title_b::first-letter {font-weight: 1000;}
+.login_body {display: block;padding:15px;margin: auto;margin-bottom: 10px; width: 50%;}
+.form-style .success{background: #D8FFC0;padding: 5px 10px 5px 10px;margin: 0px 0px 5px 0px;border: none;font-weight: bold;color: #2E6800;border-left: 3px solid #2E6800;text-align: center;}
+.form-style .error {background: #FFE8E8;padding: 5px 10px 5px 10px;margin: 0px 0px 5px 0px;border: none;font-weight: bold;color: #FF0000;border-left: 3px solid #FF0000;text-align: center;}
