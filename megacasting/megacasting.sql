@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 07 Mai 2015 à 11:37
+-- Généré le :  Jeu 07 Mai 2015 à 15:25
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -45,6 +45,28 @@ INSERT INTO `annonceur` (`id_annonceur`, `nom_annonceur`, `id_information`) VALU
 (9, 'coucou', 11),
 (10, 'Bonjour', 12),
 (11, 'Bernard', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `compte`
+--
+
+CREATE TABLE IF NOT EXISTS `compte` (
+  `identifiant_compte` int(11) NOT NULL AUTO_INCREMENT,
+  `login_compte` varchar(40) NOT NULL,
+  `password_compte` varchar(40) NOT NULL,
+  PRIMARY KEY (`identifiant_compte`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `compte`
+--
+
+INSERT INTO `compte` (`identifiant_compte`, `login_compte`, `password_compte`) VALUES
+(1, 'alepage', 'not24get'),
+(2, 'lvannoort', 'not24get'),
+(3, 'splard', 'not24get');
 
 -- --------------------------------------------------------
 
