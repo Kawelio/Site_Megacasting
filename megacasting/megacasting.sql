@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Jeu 07 Mai 2015 à 15:25
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Client: localhost
+-- Généré le: Ven 15 Mai 2015 à 20:06
+-- Version du serveur: 5.6.12-log
+-- Version de PHP: 5.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `megacasting`
+-- Base de données: `megacasting`
 --
+CREATE DATABASE IF NOT EXISTS `megacasting` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `megacasting`;
 
 -- --------------------------------------------------------
 
@@ -147,21 +149,28 @@ CREATE TABLE IF NOT EXISTS `information` (
   `pays_information` varchar(35) NOT NULL,
   `password_information` varchar(50) NOT NULL,
   `level_information` int(11) NOT NULL DEFAULT '1',
+  `token_information` text NOT NULL,
+  `validation_information` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_information`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Contenu de la table `information`
 --
 
-INSERT INTO `information` (`id_information`, `mail_information`, `tel_fixe_information`, `tel_port_information`, `rue_information`, `ville_information`, `cp_information`, `pays_information`, `password_information`, `level_information`) VALUES
-(7, 'coucou@hotmail.fr', 626266, 2316531, 'gogo', 'bignon', 53150, 'hahaha', '', 1),
-(8, 'lucasnff', 626, 6353, 'juju', 'juju', 53150, 'lvaaz', '', 1),
-(9, 'nihkhgk', 265453, 4565435, 'jiji', 'jiji', 53150, 'iji', '', 1),
-(10, 'gtgt', 2626, 2626, '26', '2626', 2626, '26262', '', 1),
-(11, 'cf', 6, 6, '06', '06', 6, '06', '', 1),
-(12, 'Bonjour', 606, 606, 'Bonjour', 'Bonjour', 53150, 'Bonjour', 'coucou', 1),
-(13, 'benard.vannort@hotmail.fr', 243021623, 612345985, 'rue de la libération', 'LAVAL', 53000, 'FRANCE', 'not24get', 1);
+INSERT INTO `information` (`id_information`, `mail_information`, `tel_fixe_information`, `tel_port_information`, `rue_information`, `ville_information`, `cp_information`, `pays_information`, `password_information`, `level_information`, `token_information`, `validation_information`) VALUES
+(7, 'coucou@hotmail.fr', 626266, 2316531, 'gogo', 'bignon', 53150, 'hahaha', '', 1, '', 0),
+(8, 'lucasnff', 626, 6353, 'juju', 'juju', 53150, 'lvaaz', '', 1, '', 0),
+(9, 'nihkhgk', 265453, 4565435, 'jiji', 'jiji', 53150, 'iji', '', 1, '', 0),
+(10, 'gtgt', 2626, 2626, '26', '2626', 2626, '26262', '', 1, '', 0),
+(11, 'cf', 6, 6, '06', '06', 6, '06', '', 1, '', 0),
+(12, 'Bonjour', 606, 606, 'Bonjour', 'Bonjour', 53150, 'Bonjour', 'coucou', 1, '', 0),
+(13, 'benard.vannort@hotmail.fr', 243021623, 612345985, 'rue de la libération', 'LAVAL', 53000, 'FRANCE', 'not24get', 1, '', 0),
+(14, 'lucasvn@hotmail.fr', 5654645, 6456, 'fgdfgfd', 'gdf', 45545, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '1', 1),
+(15, 'lucasvn@hotmail.fr', 2147483647, 2147483647, 'token', 'token', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '0a23d01468d7806d42c3cd0b4fd089574b2893e3', 0),
+(16, 'lucasvn@hotmail.fr', 2147483647, 2147483647, 'test', 'tes', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, 'ae915a3deb7259e65748b0863eeefb577afdf415', 0),
+(17, 'lucasvn@hotmail.fr', 56456546, 6546464, 'test', 'test', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '237df9f9230005357da5bcb86b0b1e38c5e72c85', 0),
+(18, 'lucasvn@hotmail.fr', 546546546, 456546456, 'test2', 'test2', 56000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '2a749c8070e63e1c108b03bc631f4539995c3fa7', 0);
 
 -- --------------------------------------------------------
 

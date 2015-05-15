@@ -1,4 +1,39 @@
-<?php session_start(); ?>
+<?php
+require_once 'connexion.php';
+$token = $_GET['token'];
+$mail = $_GET['mail'];
+if(!empty($_GET)){
+    $q = array('mail' => $mail, 'token' => $token);
+    $sql = 'SELECT token_information, mail_information FROM information WHERE mail_information = :mail AND token_information = :token';
+    $req = $bdd->prepare($sql);
+    $req->execute($q);
+    $count = $req->rowCount($sql);
+    if($count == 1){
+        $v = array('mail' => $mail, 'validation' => '1');
+        //Verifier si l'utilisateur est actif
+        $sql = 'SELECT token_information, validation_information FROM information WHERE mail_information = :mail AND validation_information = :validation';
+        $req = $bdd->prepare($sql);
+        $req->execute($v);
+        $dejactif = $req->rowCount($sql);
+        if($dejactif == 1){
+            $output = json_encode(array('type'=>'error', 'text' => 'Utilisateur déjà actif !'));
+            die($output);
+        } else {
+            //Sinon on active l'utilisateur
+            $u = array('mail' => $mail, 'validation' => '1');
+            $sql = 'UPDATE information SET validation_information = :validation WHERE mail_information = :mail';
+            $req = $bdd->prepare($sql);
+            $req->execute($u);
+            $output = json_encode(array('type'=>'message', 'text' => 'Votre compte est desormais actif !'));
+            die($output);
+        }
+    } else {
+        //Utilisateur inconnu
+        $output = json_encode(array('type'=>'error', 'text' => 'Mauvais token !'));
+        die($output);
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +41,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Megacasting | Login</title>
+    <title>Megacasting | Activation</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -25,47 +60,8 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript">
-    //Login form
-    $(document).ready(function() {
-        // Login form
-        $("#connection_login").click(function() { 
-            var proceed = true;
-            $("#login input[required=true]").each(function(){
-                $(this).css('border-color',''); 
-                if(!$.trim($(this).val())){
-                    $(this).css('border-color','red');
-                    proceed = false;
-                }
-            });
-            if(proceed){
-                post_data = {
-                    'login'   : $('input[name=login]').val(), 
-                    'password'  : $('input[name=password]').val(), 
-                };
-                    
-                //Ajax post data to server
-                $.post('ajax_login.php', post_data, function(response){  
-                    if(response.type == 'error'){ 
-                        output = '<div class="error">'+response.text+'</div>';
-                    }else{
-                        output = '<div class="success">'+response.text+'</div>';
-                        //reset values in all input fields
-                        $("#login  input[required=true]").val(''); 
-                    }
-                    $("#login_results").hide().html(output).slideDown();
-                }, 'json');
-            }
-            if(<?php $_SESSION['user']; ?> != null){
-                document.location.replace('account.php');
-            }
-        });
-            
-        $("#login  input[required=true]").keyup(function() { 
-            $(this).css('border-color',''); 
-            $("#result").slideUp();
-        });
-    });
-</script>
+    //Activate form
+    </script>
 </head><!--/head-->
 <body>
 

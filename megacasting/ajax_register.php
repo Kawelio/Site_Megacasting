@@ -11,18 +11,7 @@ if($_POST){
 	} 
 
 	// connection database
-	$serveur ='127.0.0.1';
-	$login ='root';
-	$mdp ='';
-	$nom_bdd='megacasting';
-	try{
-		$bdd = new PDO('mysql:host='.$serveur.';dbname='.$nom_bdd.'', $login, $mdp);
-	}
-	catch(Exception $output){
-		//If database couldn't be connected output error.
-	    $output = json_encode(array('type'=>'error', 'text' => 'Il y a eu un problème avec la base de donnée !'));
-		die($output);
-	}
+	require_once "connexion.php";
 		
 	//Sanitize input data using PHP filter_var().
 	$mail		= filter_var($_POST["mail"], FILTER_SANITIZE_EMAIL);
@@ -32,9 +21,10 @@ if($_POST){
 	$ville		= filter_var($_POST["ville"], FILTER_SANITIZE_STRING);
 	$code		= filter_var($_POST["code"], FILTER_SANITIZE_NUMBER_INT);
 	$pays		= filter_var($_POST["pays"], FILTER_SANITIZE_STRING);
-	$password		= filter_var($_POST["password"], FILTER_SANITIZE_STRING);
-	$password_verif		= filter_var($_POST["password_verif"], FILTER_SANITIZE_STRING);
+	$password		= sha1($_POST["password"]);
+	$password_verif		= sha1($_POST["password_verif"]);
 	$level		= filter_var($_POST["level"], FILTER_SANITIZE_NUMBER_INT);
+	$token      = sha1(uniqid(rand()));
 
 	//additional php validation
 	if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){ //email validation
@@ -75,11 +65,11 @@ if($_POST){
 	}
 	                  
 	// requete sql 
-	$req = $bdd->prepare('INSERT INTO information(mail_information, tel_fixe_information, tel_port_information, rue_information, ville_information, cp_information, pays_information, password_information, level_information)
-	VALUES(:mail_information,:tel_fixe_information,:tel_port_information,:rue_information,:ville_information,:cp_information,:pays_information,:password_information,:level_information)')
+	$req = $bdd->prepare('INSERT INTO information(mail_information, tel_fixe_information, tel_port_information, rue_information, ville_information, cp_information, pays_information, password_information, level_information, token_information)
+	VALUES(:mail_information,:tel_fixe_information,:tel_port_information,:rue_information,:ville_information,:cp_information,:pays_information,:password_information,:level_information,:token_information)')
 	or exit(print_r($bdd->errorInfo()));
 	
-	$req->execute(array('mail_information' => $mail,'tel_fixe_information' => $tel_fixe,'tel_port_information' => $tel_port,'rue_information' => $rue,'ville_information' => $ville,'cp_information' => $code,'pays_information' => $pays,'password_information' => $password,'level_information' => $level));
+	$req->execute(array('mail_information' => $mail,'tel_fixe_information' => $tel_fixe,'tel_port_information' => $tel_port,'rue_information' => $rue,'ville_information' => $ville,'cp_information' => $code,'pays_information' => $pays,'password_information' => $password,'level_information' => $level, 'token_information' => $token));
 
 	$req->closeCursor();
 
@@ -88,8 +78,22 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'La création a échoué ! S\'il vous plaît vérifiez les valeurs saisies !'));
 		die($output);
 	}else{
-		$output = json_encode(array('type'=>'message', 'text' => 'Votre compte a bien été créer, vous allez recevoir une confirmation !'));
+		$output = json_encode(array('type'=>'message', 'text' => 'Votre compte a bien été créer, vous allez recevoir une confirmation par mail !'));
 		die($output);
+
+		//Envoie mail validation
+		$to = $mail;
+		$sujet = 'Activation de votre compte';
+		$body = '
+		Bonjour, veuillez activer votre compte en cliquant ici -> 
+		<a href="http://localhost/megacasting/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
+		$entete = "MIME-Version: 1.0\r\n";
+		$entete .= "Content-type: text/html; charset=UTF-8\r\n";
+		$entete .= 'From : no-reply@megacasting.com ::' . "\r\n" .
+		'Reply-To: contact@megacasting.com' . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+
+		mail($to,$sujet,$body,$entete);
 	}
 }
 ?>

@@ -51,7 +51,7 @@
                         'rue'  : $('input[name=rue]').val(), 
                         'ville'  : $('input[name=ville]').val(), 
                         'code'  : $('input[name=postal]').val(), 
-                        'pays'  : $('input[name=pays]').val(), 
+                        'pays'  : $('select[name=pays]').val(), 
                         'password'  : $('input[name=password]').val(), 
                         'password_verif'  : $('input[name=password_verif]').val(), 
                         'level'  : $('select[name=level]').val() 
@@ -139,7 +139,7 @@
             <h2 class="text-center wowload fadeInUp title_b">S'enregistrer</h2>
             <div id="register_body" class="row wowload fadeInLeftBig">      
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-                    <p>Identifiant : <input class="login_body" type="email" required="true" placeholder="Email" id="email" name="email"></p>
+                    <p>Email : <input class="login_body" type="email" required="true" placeholder="Email" id="email" name="email"></p>
                     <p>Rue : <input class="login_body" type="text" required="true" placeholder="Rue" id="rue" name="rue"></p>
                     <p>Ville : <input class="login_body" type="text" required="true" placeholder="Ville" id="ville" name="ville"></p>
                     <p>Code postal : <input class="login_body" type="text" required="true" placeholder="Code postal" id="postal" name="postal"></p>
