@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php
+session_start();
+require('auth.php');
+if(Auth::islog()){
+
+}else{
+	header('Location:login.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Megacasting | Login</title>
+    <title>Megacasting | Private</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
@@ -24,45 +32,6 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script type="text/javascript">
-    //Login form
-    $(document).ready(function() {
-        // Login form
-        $("#connection_login").click(function() { 
-            var proceed = true;
-            $("#login input[required=true]").each(function(){
-                $(this).css('border-color',''); 
-                if(!$.trim($(this).val())){
-                    $(this).css('border-color','red');
-                    proceed = false;
-                }
-            });
-            if(proceed){
-                post_data = {
-                    'login'   : $('input[name=login]').val(), 
-                    'password'  : $('input[name=password]').val(), 
-                };
-                    
-                //Ajax post data to server
-                $.post('ajax_login.php', post_data, function(response){  
-                    if(response.type == 'error'){ 
-                        output = '<div class="error">'+response.text+'</div>';
-                    }else{
-                        output = '<div class="success">'+response.text+'</div>';
-                        //reset values in all input fields
-                        $("#login  input[required=true]").val(''); 
-                    }
-                    $("#login_results").hide().html(output).slideDown();
-                }, 'json');
-            }
-        });
-            
-        $("#login  input[required=true]").keyup(function() { 
-            $(this).css('border-color',''); 
-            $("#result").slideUp();
-        });
-    });
-</script>
 </head><!--/head-->
 <body>
 
@@ -123,17 +92,9 @@
     </header><!--/header-->
 
     <div id="login" class="spacer form-style">
-        <div class="container contactform center" id="contact_body">
-        <h2 class="text-center wowload fadeInUp title_b">Se connecter</h2>
-        <div id="login_body" class="row wowload fadeInLeftBig">      
-          <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-            <input class="login_body" type="text" required="true" placeholder="Identifiant" id="login" name="login">
-            <input class="login_body" type="password" required="true" placeholder="Password" id="password" name="password">
-            <a href="register.php">Vous n'êtes pas encore inscrit ?</a><br/>
-            <a href="wrong.php">Vous avez oubliez votre mot de passe ?</a><br/>
-            <button id="connection_login" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Se connecter</button>
-          </div>
-        </div>
+      <div class="container contactform center" id="contact_body">
+        <h2 class="text-center wowload fadeInUp title_b">Gestion du compte</h2>
+        <a href="logout.php">Se déconnecter</a>
       </div>
       <br/>
       <div id="login_results"></div>

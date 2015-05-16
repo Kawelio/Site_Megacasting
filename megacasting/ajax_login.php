@@ -16,8 +16,8 @@ if($_POST)
 	require_once "connexion.php";
 	
 	//Sanitize input data using PHP filter_var().
-	$login		= filter_var($_POST["login"], FILTER_SANITIZE_STRING);
-	$password		= filter_var($_POST["password"], FILTER_SANITIZE_STRING);
+	$login		= filter_var($_POST["login"], FILTER_VALIDATE_EMAIL);
+	$password		= sha1($_POST["password"]);
 	
 	//additional php validation
 	if(strlen($login)<2){ // If length is less than 4 it will output JSON error.
@@ -29,19 +29,21 @@ if($_POST)
 		die($output);
 	}
 	                  
-	$req_connection = $bdd->query("SELECT mail_information, password_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "'");
+	$req_connection = $bdd->query("SELECT mail_information, password_information, validation_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
         
-        if($req_connection->rowCount() > 0){
-            $_SESSION['user'] = array(
-            'login' => $login,
-            'password' => $password,                          
-            );
-        }else{
-            $output = json_encode(array('type'=>'error', 'text' => 'Il y a eu un problème avec la connection !'));
+    if($req_connection->rowCount() == 1){
+        $_SESSION['Auth'] = array(
+        'login' => $login,
+        'password' => $password                         
+        );
+        $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
+		die($output);
+		header('Location: private_auth.php');
+    }else{
+        $output = json_encode(array('type'=>'error', 'text' => 'Votre compte n\'est pas actif ! Verifier vos mails pour activer votre compte !'));
 	    die($output);
-        }
-        
-	// fermeture de la requête
+    }
+    // fermeture de la requête
 	$req_connection->closeCursor();
 }
 ?>
