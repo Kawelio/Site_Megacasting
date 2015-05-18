@@ -1,8 +1,8 @@
+<?php session_start(); ?>
 <?php
-session_start();
 require('auth.php');
 if(Auth::islog()){
-
+    echo 'coucou';
 }else{
 	header('Location:login.php');
 }

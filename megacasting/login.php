@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -124,17 +124,17 @@
 
     <div id="login" class="spacer form-style">
         <div class="container contactform center" id="contact_body">
-        <h2 class="text-center wowload fadeInUp title_b">Se connecter</h2>
-        <div id="login_body" class="row wowload fadeInLeftBig">      
-          <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-            <input class="login_body" type="text" required="true" placeholder="Identifiant" id="login" name="login">
-            <input class="login_body" type="password" required="true" placeholder="Password" id="password" name="password">
-            <a href="register.php">Vous n'êtes pas encore inscrit ?</a><br/>
-            <a href="wrong.php">Vous avez oubliez votre mot de passe ?</a><br/>
-            <button id="connection_login" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Se connecter</button>
-          </div>
+            <h2 class="text-center wowload fadeInUp title_b">Se connecter</h2>
+            <div id="login_body" class="row wowload fadeInLeftBig">      
+              <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
+                <input class="login_body" type="text" required="true" placeholder="Identifiant" id="login" name="login">
+                <input class="login_body" type="password" required="true" placeholder="Password" id="password" name="password">
+                <a href="register.php">Vous n'êtes pas encore inscrit ?</a><br/>
+                <a href="wrong.php">Vous avez oubliez votre mot de passe ?</a><br/>
+                <button id="connection_login" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Se connecter</button>
+              </div>
+            </div>
         </div>
-      </div>
       <br/>
       <div id="login_results"></div>
     </div>

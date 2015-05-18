@@ -1,4 +1,5 @@
 <?php session_start(); ?>
+<?php require_once 'connexion.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +8,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Megacasting | Votre aventure commence ici</title>
-	
-	<!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
@@ -128,12 +127,7 @@
     <section id="post">
         <div class="container_post">
             <?php
-              $VALEUR_hote='localhost';
-              $VALEUR_nom_bd='megacasting';
-              $VALEUR_user='root';
-              $VALEUR_mot_de_passe='';
-              $connexion = new PDO('mysql:host='.$VALEUR_hote.';dbname='.$VALEUR_nom_bd, $VALEUR_user, $VALEUR_mot_de_passe);
-              $resultats=$connexion->query("SELECT desc_offre, int_offre, date_offre, nom_annonceur FROM offre INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur");
+              $resultats=$bdd->query("SELECT desc_offre, int_offre, date_offre, nom_annonceur FROM offre INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur");
               $resultats->setFetchMode(PDO::FETCH_OBJ);
               while( $resultat = $resultats->fetch() )
               {
