@@ -39,7 +39,14 @@
                     </div>
                     <div class="col-sm-6 col-xs-8">
                         <div class="social">
-                            <a href="login.php">Se connecter</a>
+                            <?php
+                                require('auth.php');
+                                if(Auth::islog()){
+                                    echo '<a href="private.php">Mon compte</a>';
+                                }else{
+                                    echo '<a href="login.php">Se connecter</a>';
+                                }
+                            ?>
                             <div class="search">
                                 <form role="form">
                                     <input type="text" class="search-form" autocomplete="off" placeholder="Search">

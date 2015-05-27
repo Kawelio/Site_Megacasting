@@ -1,8 +1,5 @@
 <?php
 session_start();
-function redirection(){
-	
-}
 if($_POST)
 {	
 	//check if its an ajax request, exit if not
@@ -44,9 +41,6 @@ if($_POST)
         );
         $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
 		die($output);
-		die('<meta http-equiv="refresh" content="0;URL=private.php">');
-		echo '<META HTTP-EQUIV="Refresh" Content="0; URL=private.php">';
-		echo "<script type='text/javascript'>document.location.replace('private.php');</script>";
     }else{
         $output = json_encode(array('type'=>'error', 'text' => 'Votre compte n\'est pas actif ! Verifier vos mails pour activer votre compte !'));
 	    die($output);

@@ -50,7 +50,8 @@
                     }else{
                         output = '<div class="success">'+response.text+'</div>';
                         //reset values in all input fields
-                        $("#login  input[required=true]").val(''); 
+                        $("#login  input[required=true]").val('');
+                        window.location.href = 'private.php';
                     }
                     $("#login_results").hide().html(output).slideDown();
                 }, 'json');

@@ -2,7 +2,7 @@
 <?php
 require('auth.php');
 if(Auth::islog()){
-    echo 'coucou';
+    echo 'la connexion a bien marchey en mode posey !';
 }else{
 	header('Location:login.php');
 }
@@ -94,7 +94,7 @@ if(Auth::islog()){
     <div id="login" class="spacer form-style">
       <div class="container contactform center" id="contact_body">
         <h2 class="text-center wowload fadeInUp title_b">Gestion du compte</h2>
-        <a href="logout.php">Se déconnecter</a>
+        <button onclick="window.location.href = 'logout.php';" class="btn btn-primary">Se déconnecter</button>
       </div>
       <br/>
       <div id="login_results"></div>
