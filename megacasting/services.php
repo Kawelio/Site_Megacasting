@@ -64,6 +64,7 @@
                       output = '<div class="error">'+response.text+'</div>';
                     }else{
                         output = '<div class="success">'+response.text+'</div>';
+                        setTimeout("window.location.href='index.php' ", 4000);
                       //reset values in all input fields
                       $("#registers  input[required=true], #registers textarea[required=true]").val(''); 
                     }
@@ -89,21 +90,22 @@
                         <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
                     </div>
                     <div class="col-sm-6 col-xs-8">
-                       <div class="social">
-                            <ul class="social-share">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li> 
-                                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fa fa-skype"></i></a></li>
-                            </ul>
+                        <div class="social">
+                            <?php
+                                require('auth.php');
+                                if(Auth::islog()){
+                                    echo '<a href="private.php">Mon compte</a>';
+                                }else{
+                                    echo '<a href="login.php">Se connecter</a>';
+                                }
+                            ?>
                             <div class="search">
                                 <form role="form">
                                     <input type="text" class="search-form" autocomplete="off" placeholder="Search">
                                     <i class="fa fa-search"></i>
                                 </form>
                            </div>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div><!--/.container-->
@@ -118,25 +120,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="index.php"><images src="images/logo.png" alt="logo"></a>
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about-us.php">About Us</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="about-us.php">A propos</a></li>
                         <li class="active"><a href="services.php">Services</a></li>
-                        <li><a href="portfolio.php">Portfolio</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog-item.php">Blog Single</a></li>
-                                <li><a href="pricing.php">Pricing</a></li>
-                                <li><a href="404.php">404</a></li>
-                                <li><a href="shortcodes.php">Shortcodes</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.php">Blog</a></li> 
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>
@@ -153,52 +144,54 @@
             <h2 class="text-center wowload fadeInUp title_b">Déposer une offre</h2>
             <div id="register_body" class="row wowload fadeInLeftBig">      
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-                    <p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>
-                    <p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>
-                    <p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>
-                    <p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>
-                    <p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>
-                    <p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>
-                    <p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>
-                    <p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">                          
-                            <?php
-                                $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
-                                $resultats->setFetchMode(PDO::FETCH_OBJ);
-                                while( $resultat = $resultats->fetch() )
-                                {
-                                  echo "<option value=".$resultat->id_contrat.">".$resultat->lib_contrat."</option>" ;  
-                                }
-                                $resultats->closeCursor();
-                            ?>                     
-                    </select></p>
-                    
-                    <p>Métier : <select class="login_body" name="metier" id="metier">                          
-                            <?php
-                                $resultats=$bdd->query("SELECT id_metier, lib_metier FROM metier ");
-                                $resultats->setFetchMode(PDO::FETCH_OBJ);
-                                while( $resultat = $resultats->fetch() )
-                                {
-                                  echo "<option value=".$resultat->id_metier.">".$resultat->lib_metier."</option>" ;  
-                                }
-                                $resultats->closeCursor();
-                            ?>                     
-                    </select></p>
-                    
-                    <p>Domaine : <select class="login_body" name="domaine" id="domaine">                          
-                            <?php
-                                $resultats=$bdd->query("SELECT id_domaine, lib_domaine FROM domaine ");
-                                $resultats->setFetchMode(PDO::FETCH_OBJ);
-                                while( $resultat = $resultats->fetch() )
-                                {
-                                  echo "<option value=".$resultat->id_domaine.">".$resultat->lib_domaine."</option>" ;  
-                                }
-                                $resultats->closeCursor();
-                            ?>                     
-                    </select></p>
-                    <button id="connection_services" class="btn btn-primary">Déposer l'offre</button>
+                 <?php
+                    if(Auth::islog()){
+                        echo '<p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>';
+                        echo '<p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>';
+                        echo '<p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>';
+                        echo '<p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>';
+                        echo '<p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>';
+                        echo '<p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>';
+                        echo '<p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>';
+                        echo '<p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">';                        
+                            $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
+                            $resultats->setFetchMode(PDO::FETCH_OBJ);
+                            while( $resultat = $resultats->fetch())
+                            {
+                                echo "<option value=".$resultat->id_contrat.">".$resultat->lib_contrat."</option>" ;  
+                            }
+                            $resultats->closeCursor();                   
+                        echo '</select></p>';
+                        
+                        echo '<p>Métier : <select class="login_body" name="metier" id="metier">';                         
+                            $resultats=$bdd->query("SELECT id_metier, lib_metier FROM metier ");
+                            $resultats->setFetchMode(PDO::FETCH_OBJ);
+                            while( $resultat = $resultats->fetch())
+                            {
+                                echo "<option value=".$resultat->id_metier.">".$resultat->lib_metier."</option>" ;  
+                            }
+                            $resultats->closeCursor();                    
+                        echo '</select></p>';
+                        
+                        echo '<p>Domaine : <select class="login_body" name="domaine" id="domaine">';                         
+                            $resultats=$bdd->query("SELECT id_domaine, lib_domaine FROM domaine ");
+                            $resultats->setFetchMode(PDO::FETCH_OBJ);
+                            while( $resultat = $resultats->fetch())
+                            {
+                                echo "<option value=".$resultat->id_domaine.">".$resultat->lib_domaine."</option>" ;  
+                            }
+                            $resultats->closeCursor();                     
+                        echo '</select></p>';
+                        echo "<button id='connection_services' class='btn btn-primary'>Déposer l\'offre</button>";
+                    }else{
+                        header('Location:login.php');
+                    }
+                    ?>
                 </div>
             </div>
         </div>
+        <br/>
+        <div id="results"></div>
         <br/>
     </div>
 

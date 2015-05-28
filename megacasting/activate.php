@@ -73,14 +73,22 @@ if(!empty($_GET)){
                         <div class="top-number"><p><i class="fa fa-phone-square"></i>  +0123 456 70 90</p></div>
                     </div>
                     <div class="col-sm-6 col-xs-8">
-                       <div class="social">
+                        <div class="social">
+                            <?php
+                                require('auth.php');
+                                if(Auth::islog()){
+                                    echo '<a href="private.php">Mon compte</a>';
+                                }else{
+                                    echo '<a href="login.php">Se connecter</a>';
+                                }
+                            ?>
                             <div class="search">
                                 <form role="form">
                                     <input type="text" class="search-form" autocomplete="off" placeholder="Search">
                                     <i class="fa fa-search"></i>
                                 </form>
                            </div>
-                       </div>
+                        </div>
                     </div>
                 </div>
             </div><!--/.container-->
@@ -95,7 +103,7 @@ if(!empty($_GET)){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="logo"></a>
+                    <a class="navbar-brand" href="index.php"><images src="images/logo.png" alt="logo"></a>
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-right">
@@ -103,16 +111,6 @@ if(!empty($_GET)){
                         <li class="active"><a href="index.php">Accueil</a></li>
                         <li><a href="about-us.php">A propos</a></li>
                         <li><a href="services.php">Services</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Casting <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog-item.php">Spectacle</a></li>
-                                <li><a href="pricing.php">Image</a></li>
-                                <li><a href="404.php">Musique</a></li>
-                                <li><a href="shortcodes.php">Shortcodes</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.php">Blog</a></li> 
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>
