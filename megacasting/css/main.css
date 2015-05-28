@@ -2525,24 +2525,52 @@ shortcodes page css
 /* Home post part */
 
 #post {
-  color:#919191;
   width:700px;
   height:auto;
-  background:#1a252b;
   margin:0 auto;
-  margin-top:100px;
-  padding-bottom:10px;
 }
+
 #post header {
   background:#C52D2F;
   height:40px;
 }
+
+#post article {
+  background:#1a252b;
+  padding : 40px;
+  font-size:14px;
+  border-radius: 0 0 5px 5px;
+  color:#dddddd;
+}
+
 #post #post_title {
   line-height:2;
   margin-left:15px;
   font-size:20px;
   color:#1a252b;
 }
+
+#post .post_dom img {
+  border-radius: 5px 0 0 0;
+  height: 50px;
+  background-size: cover;
+}
+
+#post .post_annonce {
+  color:#919191;
+  width:700px;
+  height:auto;
+  background:#c52d2f;
+  margin-top:20px;
+  border-radius: 5px 5px 0 0;
+}
+
+#post .container_annonce {
+  -webkit-box-shadow: #bdc3c7 0 5px 5px;
+  -moz-box-shadow: #bdc3c7 0 5px 5px;
+  box-shadow: #bdc3c7 0 5px 5px;
+}
+
 #post #post_by {
   margin-left:10px;
   font-size:14px;
@@ -2550,16 +2578,12 @@ shortcodes page css
   margin-right:15px;
   color:#1a252b;
 }
+
 #post #post_date {
   float:right;
   line-height:2.5;
   margin-right:15px;
   color:#1a252b;
-}
-#post article {
-  margin:20px;
-  margin-top:40px;
-  font-size:14px;
 }
 
 #post .code {
