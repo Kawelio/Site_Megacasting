@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+<?php require_once 'connexion.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Services | Corlate</title>
-    
-    <!-- core CSS -->
+    <title>Megacasting | Votre aventure commence ici</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/megacasting.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    
+    <link href="css/responsive.css" rel="stylesheet">   
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -24,6 +24,59 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Login form
+            $("#connection_services").click(function() { 
+                   
+                var proceed = true;
+                $("#registers input[required=true], #registers textarea[required=true]").each(function(){
+                    $(this).css('border-color',''); 
+                    if(!$.trim($(this).val())){
+                        $(this).css('border-color','red');
+                        proceed = false;
+                    }
+                    //check invalid email
+                    var email_reg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/; 
+                    if($(this).attr("type")=="email" && !email_reg.test($.trim($(this).val()))){
+                        $(this).css('border-color','red');  
+                        proceed = false;       
+                    } 
+                });
+                if(proceed){
+                    post_data = {
+                        'intitule'   : $('input[name=intitule]').val(), 
+                        'reference'  : $('input[name=reference]').val(), 
+                        'date'  : $('input[name=date]').val(), 
+                        'duree'  : $('input[name=duree]').val(), 
+                        'date_debut'  : $('input[name=date_debut]').val(), 
+                        'localisation'  : $('input[name=localisation]').val(), 
+                        'description'  : $('select[name=description]').val(), 
+                        'type_contrat'  : $('select[name=type_contrat]').val(), 
+                        'metier'  : $('select[name=metier]').val(), 
+                        'domaine'  : $('select[name=domaine]').val() 
+                    };
+                        
+                    //Ajax post data to server
+                    $.post('ajax_services.php', post_data, function(response){  
+                    if(response.type == 'error'){ 
+                      output = '<div class="error">'+response.text+'</div>';
+                    }else{
+                        output = '<div class="success">'+response.text+'</div>';
+                      //reset values in all input fields
+                      $("#registers  input[required=true], #registers textarea[required=true]").val(''); 
+                    }
+                    $("#results").hide().html(output).slideDown();}, 'json');
+                }
+            });
+                
+            $("#registers input[required=true], #registers textarea[required=true]").keyup(function() { 
+                $(this).css('border-color',''); 
+                $("#results").slideUp();
+            });
+        });
+    </script>
 </head><!--/head-->
 
 <body>
@@ -92,172 +145,64 @@
         
     </header><!--/header-->
 
-    <section id="feature" class="transparent-bg">
-        <div class="container">
-           <div class="center wow fadeInDown">
-                <h2>Our Services</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
+  
+ <!-- Dépot annonce -->
 
-            <div class="row">
-                <div class="features">
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-bullhorn"></i>
-                            <h2>Fresh and Clean</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-comments"></i>
-                            <h2>Retina ready</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-cloud-download"></i>
-                            <h2>Easy to customize</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-                
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-leaf"></i>
-                            <h2>Adipisicing elit</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-cogs"></i>
-                            <h2>Sed do eiusmod</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-heart"></i>
-                            <h2>Labore et dolore</h2>
-                            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-                </div><!--/.services-->
-            </div><!--/.row--> 
-
-
-            <div class="get-started center wow fadeInDown">
-                <h2>Ready to get started</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore  magna aliqua. <br>  Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
-                <div class="request">
-                    <h4><a href="#">Request a free Quote</a></h4>
+ <div id="registers" class="spacer form-style">
+        <div class="container registerform center">
+            <h2 class="text-center wowload fadeInUp title_b">Déposer une offre</h2>
+            <div id="register_body" class="row wowload fadeInLeftBig">      
+                <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
+                    <p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>
+                    <p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>
+                    <p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>
+                    <p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>
+                    <p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>
+                    <p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>
+                    <p>Description : <textarea class="login_body" cols="50" rows="6" name="description" required="true" placeholder="Description" id="description"></textarea>
+                    </p>
+                    <p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">                          
+                            <?php
+                                $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch() )
+                                {
+                                  echo "<option value=".$resultat->id_contrat.">".$resultat->lib_contrat."</option>" ;  
+                                }
+                                $resultats->closeCursor();
+                            ?>                     
+                    </select></p>
+                    
+                    <p>Métier : <select class="login_body" name="metier" id="metier">                          
+                            <?php
+                                $resultats=$bdd->query("SELECT id_metier, lib_metier FROM metier ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch() )
+                                {
+                                  echo "<option value=".$resultat->id_metier.">".$resultat->lib_metier."</option>" ;  
+                                }
+                                $resultats->closeCursor();
+                            ?>                     
+                    </select></p>
+                    
+                    <p>Domaine : <select class="login_body" name="domaine" id="domaine">                          
+                            <?php
+                                $resultats=$bdd->query("SELECT id_domaine, lib_domaine FROM domaine ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch() )
+                                {
+                                  echo "<option value=".$resultat->id_domaine.">".$resultat->lib_domaine."</option>" ;  
+                                }
+                                $resultats->closeCursor();
+                            ?>                     
+                    </select></p>
+                    <button id="connection_services" class="btn btn-primary">Déposer l'offre</button>
                 </div>
-            </div><!--/.get-started-->
-
-            <div class="clients-area center wow fadeInDown">
-                <h2>What our client says</h2>
-                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4 wow fadeInDown">
-                    <div class="clients-comments text-center">
-                        <img src="images/client1.png" class="img-circle" alt="">
-                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</h3>
-                        <h4><span>-John Doe /</span>  Director of corlate.com</h4>
-                    </div>
-                </div>
-                <div class="col-md-4 wow fadeInDown">
-                    <div class="clients-comments text-center">
-                        <img src="images/client2.png" class="img-circle" alt="">
-                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</h3>
-                        <h4><span>-John Doe /</span>  Director of corlate.com</h4>
-                    </div>
-                </div>
-                <div class="col-md-4 wow fadeInDown">
-                    <div class="clients-comments text-center">
-                        <img src="images/client3.png" class="img-circle" alt="">
-                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt</h3>
-                        <h4><span>-John Doe /</span>  Director of corlate.com</h4>
-                    </div>
-                </div>
-           </div>
-
-        </div><!--/.container-->
-    </section><!--/#feature-->
-
-
-    <section id="bottom">
-        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Company</h3>
-                        <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">We are hiring</a></li>
-                            <li><a href="#">Meet the team</a></li>
-                            <li><a href="#">Copyright</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Contact us</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Support</h3>
-                        <ul>
-                            <li><a href="#">Faq</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">Refund policy</a></li>
-                            <li><a href="#">Ticket system</a></li>
-                            <li><a href="#">Billing system</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Developers</h3>
-                        <ul>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">SEO Marketing</a></li>
-                            <li><a href="#">Theme</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Email Marketing</a></li>
-                            <li><a href="#">Plugin Development</a></li>
-                            <li><a href="#">Article Writing</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Our Partners</h3>
-                        <ul>
-                            <li><a href="#">Adipisicing Elit</a></li>
-                            <li><a href="#">Eiusmod</a></li>
-                            <li><a href="#">Tempor</a></li>
-                            <li><a href="#">Veniam</a></li>
-                            <li><a href="#">Exercitation</a></li>
-                            <li><a href="#">Ullamco</a></li>
-                            <li><a href="#">Laboris</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
             </div>
         </div>
-    </section><!--/#bottom-->
+        <br/>
+    </div>
+
 
     <footer id="footer" class="midnight-blue">
         <div class="container">
