@@ -2,7 +2,6 @@
 <?php
 require('auth.php');
 if(Auth::islog()){
-    echo 'la connexion a bien marchey en mode posey !';
 }else{
 	header('Location:login.php');
 }
@@ -94,6 +93,22 @@ if(Auth::islog()){
     <div id="login" class="spacer form-style">
       <div class="container contactform center" id="contact_body">
         <h2 class="text-center wowload fadeInUp title_b">Gestion du compte</h2>
+        <?php 
+                require_once 'connexion.php';
+                $req = $bdd->query("SELECT tel_fixe_information, tel_port_information, rue_information, ville_information, cp_information, pays_information, level_information, mail_information, password_information, validation_information FROM information WHERE mail_information = '" . $_SESSION['Auth']['login'] . "' AND password_information = '" . $_SESSION['Auth']['password'] . "' AND validation_information = '1'");
+                $row = $req->fetch();
+                if($row['level_information'] == '3'){
+                    $level = 'Artiste';
+                } else if($row['level_information'] == '2'){
+                    $level = 'Diffuseur';
+                } else if($row['level_information'] == '1'){
+                    $level = 'Annonceur';
+                } else {
+                    $level = 'Type de compte invalide';
+                }
+                echo '</br>Vos informations : </br>Identifiant : ' . $_SESSION['Auth']['login'] . '</br>Téléphone fixe : ' . $row['tel_fixe_information'] . '</br>Téléphone portable : ' . $row['tel_port_information'] . '</br>Rue : ' . $row['rue_information'] . '</br>Ville : ' . $row['ville_information'] . '</br>Code postal : ' . $row['cp_information'] . '</br>Pays : ' . $row['pays_information'] . '</br>Rue : ' . $row['rue_information'] . '</br>Type de compte : ' . $level . '</br><button onclick="" class="btn btn-primary">Modifier mes informations</button></br>';
+                echo '<button onclick="" class="btn btn-primary">Modifier mon mot de passe</button></br>'; 
+        ?>
         <button onclick="window.location.href = 'logout.php';" class="btn btn-primary">Se déconnecter</button>
       </div>
       <br/>

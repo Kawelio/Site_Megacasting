@@ -379,7 +379,7 @@
                     <p>Téléphone fixe : <input class="login_body" type="text" name="phone" maxlength="15" placeholder="02XXXXXXXX"  required="true" class="tel-number-field long" /></p>
                     <p>Téléphone mobile : <input class="login_body" type="text" name="phone_mobile" maxlength="15" placeholder="06XXXXXXXX"  required="true" class="tel-number-field long" /></p>
                     <p>Type de compte : <select class="login_body" name="level" id="level">
-                        <option value="3">Professionnel</option>
+                        <option value="3">Artiste</option>
                         <option value="2">Diffuseur</option>
                         <option value="1">Annonceur</option>
                     </select></p>
