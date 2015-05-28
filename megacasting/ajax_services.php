@@ -20,10 +20,10 @@ if($_POST){
 	$duree                  = filter_var($_POST["duree"], FILTER_SANITIZE_NUMBER_INT);
 	$date_debut		= filter_var($_POST["date_debut"], FILTER_SANITIZE_STRING);
 	$localisation		= filter_var($_POST["localisation"], FILTER_SANITIZE_STRING);
-	$description            = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
-	$type_contrat		= filter_var($_POST["type_contrat"], FILTER_SANITIZE_NUMBER_INT);
-	$metier         	= filter_var($_POST["metier"], FILTER_SANITIZE_NUMBER_INT);
-	$domaine		= filter_var($_POST["domaine"], FILTER_SANITIZE_NUMBER_INT);
+	$type_contrat		= filter_var($_POST["type_contrat"], FILTER_SANITIZE_STRING);
+	$metier         	= filter_var($_POST["metier"], FILTER_SANITIZE_STRING);
+	$domaine		= filter_var($_POST["domaine"], FILTER_SANITIZE_STRING);
+        $description            = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
 
 	//additional php validation
 	if(!filter_var($intitule, FILTER_SANITIZE_STRING)){ //email validation
@@ -51,7 +51,7 @@ if($_POST){
 		die($output);
 	}
 	if(!filter_var($description, FILTER_SANITIZE_STRING)){ //check emtpy message
-		$output = json_encode(array('type'=>'error', 'text' => 'Entrer une localisation valide !'));
+		$output = json_encode(array('type'=>'error', 'text' => 'Entrer une description valide !'));
 		die($output);
 	}
 	if(!filter_var($type_contrat, FILTER_SANITIZE_NUMBER_INT)){ //check emtpy message
@@ -77,7 +77,7 @@ if($_POST){
 	VALUES(:int_offre,:ref_offre,:date_offre,:duree_offre,:date_deb_offre,:loc_offre,:desc_offre,:validation_offre,:id_annonceur,:id_contrat,:id_metier,:id_domaine)')
 	or exit(print_r($bdd->errorInfo()));
 	
-	$req->execute(array('int_offre' => $intitule,'ref_offre' => $reference,'date_offre' => $date,'duree_offre' => $duree,'date_deb_offre' => $date_debut,'loc_offre' => $localisation,'validation_offre' => $validation_offre,'id_annonceur' => $id_annonceur,'id_contrat' => $type_contrat, 'id_metier' => $metier, 'id_domaine' => $domaine));
+	$req->execute(array('int_offre' => $intitule,'ref_offre' => $reference,'date_offre' => $date,'duree_offre' => $duree,'date_deb_offre' => $date_debut,'loc_offre' => $localisation,'desc_offre' => $description, 'validation_offre' => $validation_offre,'id_annonceur' => $id_annonceur,'id_contrat' => $type_contrat, 'id_metier' => $metier, 'id_domaine' => $domaine));
 
 	$req->closeCursor();
 

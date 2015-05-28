@@ -52,7 +52,7 @@
                         'duree'  : $('input[name=duree]').val(), 
                         'date_debut'  : $('input[name=date_debut]').val(), 
                         'localisation'  : $('input[name=localisation]').val(), 
-                        'description'  : $('select[name=description]').val(), 
+                        'description'  : $('input[name=description]').val(), 
                         'type_contrat'  : $('select[name=type_contrat]').val(), 
                         'metier'  : $('select[name=metier]').val(), 
                         'domaine'  : $('select[name=domaine]').val() 
@@ -159,8 +159,7 @@
                     <p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>
                     <p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>
                     <p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>
-                    <p>Description : <textarea class="login_body" cols="50" rows="6" name="description" required="true" placeholder="Description" id="description"></textarea>
-                    </p>
+                    <p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>
                     <p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">                          
                             <?php
                                 $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
