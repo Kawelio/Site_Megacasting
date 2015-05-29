@@ -60,7 +60,6 @@
 </head><!--/head-->
 
 <body class="homepage">
-    
     <!-- MASQUE -->
     <div id="mask"></div>
     <header id="header">

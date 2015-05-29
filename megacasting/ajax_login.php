@@ -29,15 +29,20 @@ if($_POST)
 		die($output);
 	}
 	                  
-	$req_connection = $bdd->query("SELECT mail_information, password_information, validation_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
-        
+	$req_connection = $bdd->query("SELECT id_information, mail_information, password_information, validation_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
+        $req_connection->setFetchMode(PDO::FETCH_OBJ);
+              while( $resultat = $req_connection->fetch() )
+              {     
+                $id_information = $resultat->id_information;
+              }
     // fermeture de la requête
 	$req_connection->closeCursor();
 
     if($req_connection->rowCount() == 1){
         $_SESSION['Auth'] = array(
         'login' => $login,
-        'password' => $password                         
+        'password' => $password,
+        'id-information' => $id_information
         );
         $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
 		die($output);

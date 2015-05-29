@@ -45,6 +45,7 @@
                 });
                 if(proceed){
                     post_data = {
+                        'nom'   : $('input[name=nom]').val(), 
                         'mail'   : $('input[name=email]').val(), 
                         'tel_fixe'  : $('input[name=phone]').val(), 
                         'tel_port'  : $('input[name=phone_mobile]').val(), 
@@ -137,7 +138,8 @@
         <div class="container registerform center">
             <h2 class="text-center wowload fadeInUp title_b">S'enregistrer</h2>
             <div id="register_body" class="row wowload fadeInLeftBig">      
-                <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
+                <div class="col-sm-6 col-sm-offset-3 col-xs-12"> 
+                    <p>Nom : <input class="login_body" type="text" required="true" placeholder="Nom" id="nom" name="nom"></p>
                     <p>Email : <input class="login_body" type="email" required="true" placeholder="Email" id="email" name="email"></p>
                     <p>Rue : <input class="login_body" type="text" required="true" placeholder="Rue" id="rue" name="rue"></p>
                     <p>Ville : <input class="login_body" type="text" required="true" placeholder="Ville" id="ville" name="ville"></p>

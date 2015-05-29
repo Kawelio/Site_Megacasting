@@ -69,9 +69,16 @@ if($_POST){
 	
         // Validation_offre correspond à l'état d'une offre.
         $validation_offre = 0;
-        //Récupération de l'id de l'annonceur grâce a une variable session.
-        $id_annonceur = 11;
         
+        //Récupération de l'id de l'annonceur grâce a une variable session.
+        $id_information = $_SESSION['Auth']['id_information'];
+        $req_connection = $bdd->query("SELECT id_annonceur FROM annonceur WHERE id_information ='" . $id_information . "'");
+        $req_connection->setFetchMode(PDO::FETCH_OBJ);
+              while( $resultat = $req_connection->fetch() )
+              {     
+                $id_annonceur = $resultat->id_annonceur;
+              }
+
 	// requete sql 
 	$req = $bdd->prepare('INSERT INTO offre(int_offre, ref_offre, date_offre, duree_offre, date_deb_offre, loc_offre, desc_offre, validation_offre, id_annonceur, id_contrat, id_metier, id_domaine)
 	VALUES(:int_offre,:ref_offre,:date_offre,:duree_offre,:date_deb_offre,:loc_offre,:desc_offre,:validation_offre,:id_annonceur,:id_contrat,:id_metier,:id_domaine)')
