@@ -24,6 +24,39 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //Login form
+            $("#search_index").click(function() {                  
+                if($("#search_index").val() == null){
+                    proceed = false;
+                }
+                if(proceed){
+                    post_data = {
+                        'recherche'   : $('input[name=search]').val(), 
+                    };
+                        
+                    //Ajax post data to server
+                    $.post('ajax_search.php', post_data, function(response){  
+                    if(response.type == 'error'){ 
+                      output = '<div class="error">'+response.text+'</div>';
+                    }else{
+                        output = '<div class="success">'+response.text+'</div>';
+                        setTimeout("window.location.href='index.php' ", 4000);
+                      //reset values in all input fields
+                      $("#registers  input[required=true], #registers textarea[required=true]").val(''); 
+                    }
+                    $("#results").hide().html(output).slideDown();}, 'json');
+                }
+            });
+                
+            $("#registers input[required=true], #registers textarea[required=true]").keyup(function() { 
+                $(this).css('border-color',''); 
+                $("#results").slideUp();
+            });
+        });
+    </script>
 </head><!--/head-->
 
 <body class="homepage">
@@ -49,8 +82,8 @@
                             ?>
                             <div class="search">
                                 <form role="form">
-                                    <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-                                    <i class="fa fa-search"></i>
+                                    <input type="text" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true">
+                                    <input type="button" id="search_index" class="fa fa-search">
                                 </form>
                            </div>
                         </div>
