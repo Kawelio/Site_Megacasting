@@ -2536,11 +2536,11 @@ shortcodes page css
 }
 
 #post article {
-  background:#1a252b;
+  background:#F2F2F2;
   padding : 40px;
   font-size:14px;
   border-radius: 0 0 5px 5px;
-  color:#dddddd;
+  color:#000000;
 }
 
 #post #post_title {

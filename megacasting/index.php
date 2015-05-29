@@ -137,6 +137,7 @@
         </div>
     </section><!--/#middle-->
 
+    </br>
     <section id="conatcat-info">
         <div class="container">
             <div class="row">
@@ -179,89 +180,5 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $(".connexion").click(function(){
-                if($("#mask").is(':visible'))
-                {
-                    $("#mask").fadeOut();
-                    $("#login-box").fadeOut();
-                    $("#register-box").fadeOut();
-                }
-                else
-                {
-                    $("#mask").fadeIn();
-                    $("#login-box").fadeIn();
-                }
-            });
-
-            $(".inscription").click(function(){
-                if($("#mask").is(':visible'))
-                {
-                    $("#mask").fadeOut();
-                    $("#login-box").fadeOut();
-                    $("#register-box").fadeOut();
-                }
-                else
-                {
-                    $("#mask").fadeIn();
-                    $("#register-box").fadeIn();
-                }
-            });
-            
-            $(".compte").click(function(){
-                if($("#mask").is(':visible'))
-                {
-                    $("#mask").fadeOut();
-                    $("#login-box").fadeOut();
-                    $("#account-box").fadeOut();
-                }
-                else
-                {
-                    $("#mask").fadeIn();
-                    $("#account-box").fadeIn();
-                }
-            });
-
-            $(".login-box-lien-register").click(function(){
-                $("#register-box").fadeOut();
-                $("#account-box").fadeOut();
-                $("#band .inscription").hide();
-                $("#band .compte").hide();
-                $("#login-box").fadeIn();
-                $("#band .connexion").show();
-            });
-        
-            $(".register-box-lien-register").click(function(){
-                $("#login-box").fadeOut();
-                $("#band .connexion").hide();
-                $("#register-box").fadeIn();
-                $("#band .inscription").show();
-            });
-            
-            $(".account-box-lien-register").click(function(){
-                $("#login-box").fadeOut();
-                $("#band .connexion").hide();
-                $("#account-box").fadeIn();
-                $("#band .compte").show();
-            });
-            
-            $(".deconnect").click(function(){
-                $("#register-box").fadeOut();
-                $("#account-box").fadeOut();
-                $("#mask").fadeOut();
-                $("#band .inscription").hide();
-                $("#band .compte").hide();
-                $("#band .connexion").show();
-            });
-
-            $("#mask").click(function(){
-                $("#mask").fadeOut();
-                $("#login-box").fadeOut();
-                $("#register-box").fadeOut();
-                $("#account-box").fadeOut();
-            });
-        });
-    </script>
 </body>
 </html>
