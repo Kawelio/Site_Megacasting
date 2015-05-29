@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 15 Mai 2015 à 20:06
+-- Généré le: Ven 29 Mai 2015 à 09:25
 -- Version du serveur: 5.6.12-log
 -- Version de PHP: 5.4.12
 
@@ -129,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `domaine` (
 --
 
 INSERT INTO `domaine` (`id_domaine`, `lib_domaine`) VALUES
-(2, 'coucou'),
-(3, 'Electronique');
+(2, 'Chant'),
+(3, 'Musicien');
 
 -- --------------------------------------------------------
 
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `information` (
   `token_information` text NOT NULL,
   `validation_information` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_information`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Contenu de la table `information`
@@ -166,11 +166,7 @@ INSERT INTO `information` (`id_information`, `mail_information`, `tel_fixe_infor
 (11, 'cf', 6, 6, '06', '06', 6, '06', '', 1, '', 0),
 (12, 'Bonjour', 606, 606, 'Bonjour', 'Bonjour', 53150, 'Bonjour', 'coucou', 1, '', 0),
 (13, 'benard.vannort@hotmail.fr', 243021623, 612345985, 'rue de la libération', 'LAVAL', 53000, 'FRANCE', 'not24get', 1, '', 0),
-(14, 'lucasvn@hotmail.fr', 5654645, 6456, 'fgdfgfd', 'gdf', 45545, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '1', 1),
-(15, 'lucasvn@hotmail.fr', 2147483647, 2147483647, 'token', 'token', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '0a23d01468d7806d42c3cd0b4fd089574b2893e3', 0),
-(16, 'lucasvn@hotmail.fr', 2147483647, 2147483647, 'test', 'tes', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, 'ae915a3deb7259e65748b0863eeefb577afdf415', 0),
-(17, 'lucasvn@hotmail.fr', 56456546, 6546464, 'test', 'test', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '237df9f9230005357da5bcb86b0b1e38c5e72c85', 0),
-(18, 'lucasvn@hotmail.fr', 546546546, 456546456, 'test2', 'test2', 56000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '2a749c8070e63e1c108b03bc631f4539995c3fa7', 0);
+(17, 'lucasvn@hotmail.fr', 56456546, 6546464, 'test', 'test', 49000, 'France', '403926033d001b5279df37cbbe5287b7c7c267fa', 3, '237df9f9230005357da5bcb86b0b1e38c5e72c85', 1);
 
 -- --------------------------------------------------------
 
@@ -242,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `offre` (
   KEY `id_metier` (`id_metier`),
   KEY `id_domaine` (`id_domaine`),
   KEY `id_media` (`id_media`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Contenu de la table `offre`
@@ -250,14 +246,15 @@ CREATE TABLE IF NOT EXISTS `offre` (
 
 INSERT INTO `offre` (`id_offre`, `int_offre`, `ref_offre`, `date_offre`, `duree_offre`, `date_deb_offre`, `loc_offre`, `desc_offre`, `validation_offre`, `id_annonceur`, `id_contrat`, `id_metier`, `id_domaine`, `id_media`) VALUES
 (1, 'modifier', 'modifier', 'Mon Dec 22 10:31:00 CET 2014', 7, 'Mon Dec 15 10:31:58 CET 2014', 'modifier', 'modifier', 0, 9, 3, 3, 3, 1),
-(2, 'Il ne faut surtout pas mettre d apostrophe', 'coucou', ' Sun Dec 14 20:11:59 CET 2014', 4, 'Sun Dec 14 20:11:59 CET 2014', 'Paris', 'Pour en mettre vous laisser un espace', 1, 6, 1, 2, 2, 1),
 (3, 'hey', 'hey', ' Sun Dec 14 20:17:41 CET 2014', 3, 'Sun Dec 14 20:17:41 CET 2014', 'coucou', 'hey', 0, 6, 1, 2, 2, 1),
 (4, 'coucou', 'coucou', ' Sun Dec 14 20:20:20 CET 2014', 3, 'Sun Dec 14 20:20:21 CET 2014', 'coucou', 'coucou', 1, 6, 1, 2, 2, 1),
 (5, 'coucou2', 'coucou2', ' Sun Dec 14 20:20:20 CET 2014', 3, 'Sun Dec 14 20:20:21 CET 2014', 'coucou2', 'coucou2', 1, 6, 1, 2, 2, 1),
 (6, 'hey', 'hey', ' Sun Dec 14 20:24:06 CET 2014', 3, 'Sun Dec 14 20:24:06 CET 2014', 'hey', 'hey', 1, 6, 1, 2, 2, 1),
 (7, 'jiji', 'jiji', ' Mon Dec 15 09:17:24 CET 2014', 5, 'Mon Dec 15 09:17:24 CET 2014', 'jiji', 'jiji', 0, 6, 1, 2, 2, 1),
 (8, 'fsdfsdf', 'sdfdsf', 'Tue Dec 16 12:06:19 CET 2014', 0, 'Tue Dec 16 12:06:19 CET 2014', 'sdfsdf', 'sdvdsdsg', 0, 6, 1, 2, 2, 1),
-(9, 'sfqsqfvsqgsq', 'qfvqfgqs', 'Tue Dec 16 12:07:20 CET 2014', 0, 'Tue Dec 16 12:07:20 CET 2014', 'qfvqdsvgqd', 'vdqvgqdg', 1, 6, 1, 2, 2, 1);
+(9, 'sfqsqfvsqgsq', 'qfvqfgqs', 'Tue Dec 16 12:07:20 CET 2014', 0, 'Tue Dec 16 12:07:20 CET 2014', 'qfvqdsvgqd', 'vdqvgqdg', 1, 6, 1, 2, 2, 1),
+(10, 'Test', '456546456', '2015-05-16', 5, '2015-05-10', 'Angers', 'tfgsdtgsrdftgrfgyrsyryrdyryrsdy', 0, 11, 2, 3, 3, NULL),
+(11, 'test', 'rfgfdghdfg', '2015-05-09', 5, '2015-05-10', 'Angers', 'sfgdsgshrsetges', 0, 11, 2, 3, 3, NULL);
 
 -- --------------------------------------------------------
 
