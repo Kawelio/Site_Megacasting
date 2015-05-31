@@ -14,7 +14,7 @@ if($_POST){
 	require_once "connexion.php";
 		
 	//Sanitize input data using PHP filter_var().
-        $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
+    $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
 	$mail		= filter_var($_POST["mail"], FILTER_SANITIZE_EMAIL);
 	$tel_fixe	= filter_var($_POST["tel_fixe"], FILTER_SANITIZE_NUMBER_INT);
 	$tel_port	= filter_var($_POST["tel_port"], FILTER_SANITIZE_NUMBER_INT);
@@ -28,7 +28,7 @@ if($_POST){
 	$token          = sha1(uniqid(rand()));
 
 	//additional php validation
-        if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //email validation
+    if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //email validation
 		$output = json_encode(array('type'=>'error', 'text' => 'Entrer un nom valide !'));
 		die($output);
 	}
@@ -58,6 +58,10 @@ if($_POST){
 	}
 	if(strlen($pays)<1){ //check emtpy message
 		$output = json_encode(array('type'=>'error', 'text' => 'Pays invalide !'));
+		die($output);
+	}
+	if($_POST["password"] == null){ //check emtpy message
+		$output = json_encode(array('type'=>'error', 'text' => 'Le mot de passe doit contenir 6 caractères au minimum !'));
 		die($output);
 	}
 	if($password_verif != $password){ //check emtpy message

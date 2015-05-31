@@ -145,45 +145,53 @@
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
                  <?php
                     if(Auth::islog()){
-                        echo '<p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>';
-                        echo '<p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>';
-                        echo '<p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>';
-                        echo '<p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>';
-                        echo '<p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>';
-                        echo '<p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>';
-                        echo '<p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>';
-                        echo '<p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">';                        
-                            $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
-                            $resultats->setFetchMode(PDO::FETCH_OBJ);
-                            while( $resultat = $resultats->fetch())
-                            {
-                                echo "<option value=".$resultat->id_contrat.">".$resultat->lib_contrat."</option>" ;  
-                            }
-                            $resultats->closeCursor();                   
-                        echo '</select></p>';
-                        
-                        echo '<p>Métier : <select class="login_body" name="metier" id="metier">';                         
-                            $resultats=$bdd->query("SELECT id_metier, lib_metier FROM metier ");
-                            $resultats->setFetchMode(PDO::FETCH_OBJ);
-                            while( $resultat = $resultats->fetch())
-                            {
-                                echo "<option value=".$resultat->id_metier.">".$resultat->lib_metier."</option>" ;  
-                            }
-                            $resultats->closeCursor();                    
-                        echo '</select></p>';
-                        
-                        echo '<p>Domaine : <select class="login_body" name="domaine" id="domaine">';                         
-                            $resultats=$bdd->query("SELECT id_domaine, lib_domaine FROM domaine ");
-                            $resultats->setFetchMode(PDO::FETCH_OBJ);
-                            while( $resultat = $resultats->fetch())
-                            {
-                                echo "<option value=".$resultat->id_domaine.">".$resultat->lib_domaine."</option>" ;  
-                            }
-                            $resultats->closeCursor();                     
-                        echo '</select></p>';
-                        echo "<button id='connection_services' class='btn btn-primary'>Déposer l\'offre</button>";
+                        $req = $bdd->query("SELECT mail_information, password_information, level_information FROM information WHERE mail_information = '" . $_SESSION['Auth']['login'] . "' AND password_information = '" . $_SESSION['Auth']['password'] . "' AND validation_information = '1'");
+                        $row = $req->fetch();
+                        if($row['level_information'] == '1'){
+                            echo '<p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>';
+                            echo '<p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>';
+                            echo '<p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>';
+                            echo '<p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>';
+                            echo '<p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>';
+                            echo '<p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>';
+                            echo '<p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>';
+                            echo '<p>Type de contrat : <select class="login_body" name="type_contrat" id="type_contrat">';                        
+                                $resultats=$bdd->query("SELECT id_contrat, lib_contrat FROM contrat ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch())
+                                {
+                                    echo "<option value=".$resultat->id_contrat.">".$resultat->lib_contrat."</option>" ;  
+                                }
+                                $resultats->closeCursor();                   
+                            echo '</select></p>';
+                            
+                            echo '<p>Métier : <select class="login_body" name="metier" id="metier">';                         
+                                $resultats=$bdd->query("SELECT id_metier, lib_metier FROM metier ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch())
+                                {
+                                    echo "<option value=".$resultat->id_metier.">".$resultat->lib_metier."</option>" ;  
+                                }
+                                $resultats->closeCursor();                    
+                            echo '</select></p>';
+                            
+                            echo '<p>Domaine : <select class="login_body" name="domaine" id="domaine">';                         
+                                $resultats=$bdd->query("SELECT id_domaine, lib_domaine FROM domaine ");
+                                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                                while( $resultat = $resultats->fetch())
+                                {
+                                    echo "<option value=".$resultat->id_domaine.">".$resultat->lib_domaine."</option>" ;  
+                                }
+                                $resultats->closeCursor();                     
+                            echo '</select></p>';
+                            echo "<button id='connection_services' class='btn btn-primary'>Déposer l\'offre</button>";
+                        } else {
+                            header( "refresh:5;url=index.php" ); 
+                            echo '<p>Vous n\'avez pas le type de compte pour déposer une annonce ! Vous allez être rediriger</p>';
+                        }
                     }else{
-                        header('Location:login.php');
+                        header( "refresh:5;url=login.php" ); 
+                        echo '<p>Vous n\'êtes pas connecter ! Vous allez être rediriger</p>';
                     }
                     ?>
                 </div>

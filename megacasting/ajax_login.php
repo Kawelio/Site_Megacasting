@@ -42,7 +42,7 @@ if($_POST)
         $_SESSION['Auth'] = array(
         'login' => $login,
         'password' => $password,
-        'id-information' => $id_information
+        'id_information' => $id_information
         );
         $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
 		die($output);
