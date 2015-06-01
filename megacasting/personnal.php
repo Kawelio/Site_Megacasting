@@ -26,40 +26,16 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            //Login form
-            $("#search_index").click(function() {                  
-                if($("#search_index").val() == null){
-                    proceed = false;
-                }
-                if(proceed){
-                    post_data = {
-                        'recherche'   : $('input[name=search]').val(), 
-                    };
-                        
-                    //Ajax post data to server
-                    $.post('ajax_search.php', post_data, function(response){  
-                    if(response.type == 'error'){ 
-                      output = '<div class="error">'+response.text+'</div>';
-                    }else{
-                        output = '<div class="success">'+response.text+'</div>';
-                        setTimeout("window.location.href='index.php' ", 4000);
-                      //reset values in all input fields
-                      $("#registers  input[required=true], #registers textarea[required=true]").val(''); 
-                    }
-                    $("#results").hide().html(output).slideDown();}, 'json');
-                }
-            });
-                
-            $("#registers input[required=true], #registers textarea[required=true]").keyup(function() { 
-                $(this).css('border-color',''); 
-                $("#results").slideUp();
-            });
+    //Login form
+    $(document).ready(function() {
+        $("#cancel_personnal").click(function() { 
+            setTimeout("window.location.href='index.php' ", 1000);
         });
-    </script>
+    });
+    </script>   
 </head><!--/head-->
 
-<body class="homepage" onLoad="trier('1')">
+<body class="homepage">
     <!-- MASQUE -->
     <div id="mask"></div>
     <header id="header">
@@ -118,77 +94,96 @@
 
     <section id="feature" >
         <div class="container">
-           <div class="center wow fadeInDown">
-                <h2>Megacasting</h2>
-                <p class="lead">MegaCasting vous accompagne et vous apporte un soutien en administration, en diffusion, vous met à disposition du matériel et des outils de travail, vous accompagne sur les dates de tournées, gère vos diffusions et vos communications. MegaCasting est devenu un véritable partenaire pour ces compagnies et ces artistes.</p>
+            <?php
+                $id_offre = $_GET['id_offre'];
+                  
+                $resultats=$bdd->query("SELECT int_offre, ref_offre, date_offre, duree_offre, date_deb_offre, loc_offre, desc_offre, nom_annonceur, lib_contrat, lib_domaine, lib_metier FROM offre INNER JOIN metier ON metier.id_metier=offre.id_metier INNER JOIN contrat ON contrat.id_contrat=offre.id_contrat INNER JOIN domaine ON domaine.id_domaine=offre.id_domaine INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur WHERE id_offre='" . $id_offre . "'");
+                $resultats->setFetchMode(PDO::FETCH_OBJ);
+                while( $resultat = $resultats->fetch() )
+                {
+            ?>
+            <div class='container_annonce'>
+                <section id="feature" >
+                    <div class="container">
+                        <div class="center wow fadeInDown">
+                            <h2><?php echo $resultat->int_offre ?></h2>
+                            <p class="lead"><?php echo $resultat->desc_offre ?></p>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+								<div class="col-sm-3">
+					 				<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+										<div class="joomla-skill">                                   
+											<p><em>Lieu</em></p>
+											<p><?php echo $resultat->loc_offre ?></p>
+										</div>
+									</div>
+								</div>
+					
+								<div class="col-sm-3">
+									<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+										<div class="html-skill">                                  
+											<p><em>Contrat</em></p>
+											<p><?php echo $resultat->lib_contrat ?></p>
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
+										<div class="css-skill">                                    
+											<p><em>Durée</em></p>
+											<p><?php echo $resultat->duree_offre ?> jours</p>
+										</div>
+									</div>
+								</div>
+					
+								<div class="col-sm-3">
+									<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms">
+										<div class="wp-skill">
+											<p><em>Métier</em></p>
+											<p><?php echo $resultat->lib_metier ?></p>                                     
+										</div>
+									</div>
+								</div>
+					
+                            </div>
+                            <div class="features">
+                                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                    <div class="feature-wrap">
+                                        <h2>Référence du casting</h2>
+                                        <h3><?php echo $resultat->ref_offre ?></h3>
+                                     </div>
+                                </div><!--/.col-md-4-->
+                                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                    <div class="feature-wrap">
+                                        <h2>Date du casting</h2>
+                                        <h3><?php echo $resultat->date_offre ?></h3>
+                                    </div>
+                                </div><!--/.col-md-4-->
+                                <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                    <div class="feature-wrap">
+                                        <h2>Domaine</h2>
+                                        <h3><?php echo $resultat->lib_domaine ?></h3>
+                                    </div>
+                                </div><!--/.col-md-4-->                                     
+                            </div><!--/.services-->
+                            <center><button id="cancel_personnal" class="btn btn-primary">Retour</button></br></center>
+                        </div><!--/.row-->    
+                    </div><!--/.container-->
+                </section><!--/#feature-->
             </div>
-
-            <div class="row">
-                <div class="features">
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-bullhorn"></i>
-                            <h2>Annonce en temps réel</h2>
-                            <h3>Des offres pourront vous correspondre</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-comments"></i>
-                            <h2>Discutez avec des professionels</h2>
-                            <h3>Toutes offres sont vérifiés et validés</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-
-                    <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="feature-wrap">
-                            <i class="fa fa-cogs"></i>
-                            <h2>Customisation personnalisé</h2>
-                            <h3>Profitez d'une expérience intuitive</h3>
-                        </div>
-                    </div><!--/.col-md-4-->
-                </div><!--/.services-->
-            </div><!--/.row-->    
+            <?php 
+            } 
+            ?>       
         </div><!--/.container-->
     </section><!--/#feature-->
 
     <section id="post">
         <div class="container_post">
-            </br>
-            <p>
-            <label for="tri">Trier par : </label>
-            <select id="tri" name="tri" onChange="trier(this.value)">
-                <option value="1">Tout</option>
-                <option value="2">Chanteur</option>
-                <option value="3">Danseur</option>
-                <option value="4">Chorégraphe</option>
-            </select>
-            </p>
-
-            <div id="resultat_annonce"></div>
         </div>
     </section><!--/#middle-->
-
     </br>
-    <section id="conatcat-info">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8">
-                    <div class="media contact-info wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-                        <div class="pull-left">
-                            <i class="fa fa-phone"></i>
-                        </div>
-                        <div class="media-body">
-                            <h2>Vous avez des questions ou besoin d'aide ?</h2>
-                            <p>Nous pouvons surement vous aidez et sommes à votre disposition, contactez nous via le formulaire de contact ou au +0123 456 70 80</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div><!--/.container-->    
-    </section><!--/#conatcat-info-->
-
+    
     <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
@@ -213,25 +208,5 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
-    <script type="text/javascript">
-    function trier(par){
-        var xhr;
-        if(window.XMLHttpRequest){
-            xhr=new XMLHttpRequest();
-        }else{
-            xhr=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-         
-        xhr.onreadystatechange=function(){
-            if(xhr.readyState==4 && xhr.status==200){
-                document.getElementById("resultat_annonce").innerHTML = xhr.responseText;
-            }
-        }
-         
-        par = encodeURIComponent(par);
-        xhr.open("GET","ajax_tri.php?tri="+par,true);
-        xhr.send();
-    }
-    </script>
 </body>
 </html>

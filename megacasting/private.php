@@ -90,7 +90,7 @@ if(Auth::islog()){
                     output = '<div class="success">'+response.text+'</div>';
                     //reset values in all input fields
                     $("#modif_infos  input[required=true]"); 
-                    setTimeout("window.location.href='private.php' ", 4000);
+                    setTimeout("window.location.href='index.php' ", 4000);
                 }
                 $("#results_infos").hide().html(output).slideDown();}, 'json');
                 }
