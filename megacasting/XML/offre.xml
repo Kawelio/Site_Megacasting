@@ -1,0 +1,13 @@
+<offre> 
+    <intitule>coucou</intitule> 
+    <reference>coucou</reference> 
+    <date> Sun Dec 14 20:20:20 CET 2014</date>
+    <duree>3</duree> 
+    <date_debut>Sun Dec 14 20:20:21 CET 2014</date_debut> 
+    <localisation>coucou</localisation> 
+    <description>coucou</description> 
+    <annonceur>non je supprime rien</annonceur> 
+    <contrat>CDI</contrat>          
+    <metier>Bucheron</metier> 
+    <domaine>Chant</domaine> 
+</offre>

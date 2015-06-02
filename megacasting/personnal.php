@@ -1,5 +1,12 @@
 <?php session_start(); ?>
-<?php require_once 'connexion.php'; ?>
+<?php require_once 'connexion.php'; 
+if(isset($_SESSION['Auth']['level_information'])){
+    $level_information = $_SESSION['Auth']['level_information'];
+    echo $level_information;
+}else{
+    $level_information = 0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,12 +30,12 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">   
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">       
 </head><!--/head-->
 
 <body class="homepage">
     <!-- MASQUE -->
-    <div id="mask"></div>²
+    <div id="mask"></div>
     <header id="header">
         <div class="top-bar">
             <div class="container">
@@ -92,13 +99,41 @@
                   $resultats->setFetchMode(PDO::FETCH_OBJ);
                   while( $resultat = $resultats->fetch() )
                   {
+                      $intitule = $resultat->int_offre;
+                      $reference = $resultat->ref_offre;
+                      $date = $resultat->date_offre;
+                      $duree = $resultat->duree_offre;
+                      $date_debut = $resultat->date_deb_offre;
+                      $localisation = $resultat->loc_offre;
+                      $description = $resultat->desc_offre;
+                      $annonceur = $resultat->nom_annonceur;
+                      $contrat = $resultat->lib_contrat;
+                      $domaine = $resultat->lib_domaine;
+                      $metier = $resultat->lib_metier;
+                  } 
+                  
+                  $_SESSION["offre"] = array(
+                      'identifiant' => $id_offre,
+                      'intitule' => $intitule,
+                      'reference' => $reference,
+                      'date' => $date,
+                      'duree' => $duree,
+                      'date_debut' => $date_debut,
+                      'localisation' => $localisation,
+                      'description' => $description,
+                      'annonceur' => $annonceur,
+                      'contrat' => $contrat,
+                      'domaine' => $domaine,
+                      'metier' => $metier
+                  );
+                  
                 ?>
                   <div class='container_annonce'>
                        <section id="feature" >
                             <div class="container">
                                <div class="center wow fadeInDown">
-                                    <h2><?php echo $resultat->int_offre ?></h2>
-                                    <p class="lead"><?php echo $resultat->desc_offre ?></p>
+                                   <h2 id="intitule"><?php echo $intitule ?></h2>
+                                   <p class="lead" id="description"><?php echo $description ?></p>
                                 </div>
 
                                 <div class="row">
@@ -109,7 +144,7 @@
 						<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
 							<div class="joomla-skill">                                   
 								<p><em>Lieu</em></p>
-								<p><?php echo $resultat->loc_offre ?></p>
+								<p><?php echo $localisation ?></p>
 							</div>
 						</div>
 					</div>
@@ -118,7 +153,7 @@
 						<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
 							<div class="html-skill">                                  
 								<p><em>Contrat</em></p>
-								<p><?php echo $resultat->lib_contrat ?></p>
+								<p><?php echo $contrat ?></p>
 							</div>
 						</div>
 					</div>
@@ -127,7 +162,7 @@
 						<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
 							<div class="css-skill">                                    
 								<p><em>Durée</em></p>
-								<p><?php echo $resultat->duree_offre ?> jours</p>
+								<p><?php echo $duree ?> jours</p>
 							</div>
 						</div>
 					</div>
@@ -136,7 +171,7 @@
 						<div class="sinlge-skill wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms">
 							<div class="wp-skill">
 								<p><em>Métier</em></p>
-								<p><?php echo $resultat->lib_metier ?></p>                                     
+								<p><?php echo $metier ?></p>                                     
 							</div>
 						</div>
 					</div>
@@ -146,32 +181,41 @@
                                         <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                             <div class="feature-wrap">
                                                 <h2>Référence du casting</h2>
-                                                <h3><?php echo $resultat->ref_offre ?></h3>
+                                                <h3><?php echo $reference ?></h3>
                                             </div>
                                         </div><!--/.col-md-4-->
                                         <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                             <div class="feature-wrap">
                                                 <h2>Date du casting</h2>
-                                                <h3><?php echo $resultat->date_offre ?></h3>
+                                                <h3><?php echo $date ?></h3>
                                             </div>
                                         </div><!--/.col-md-4-->
                                       
                                         <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                                             <div class="feature-wrap">
                                                 <h2>Domaine</h2>
-                                                <h3><?php echo $resultat->lib_domaine ?></h3>
+                                                <h3><?php echo $domaine ?></h3>
                                             </div>
                                         </div><!--/.col-md-4-->                                     
                                     </div><!--/.services-->
                                 </div><!--/.row-->    
                             </div><!--/.container-->
                         </section><!--/#feature-->
-                    </div>
-                  <?php 
-                  } 
-                  ?>
-                
-               </div><!--/.container-->
+                        <div class="row wowload fadeInLeftBig" style="text-align: center;">
+                            <?php if ($level_information == 2) { ?>
+                                 <a href="download.php?id=2">
+                                     <input type="button" id="download_xml" class="btn btn-primary" value="Récupérer l'offre en XML">
+                                 </a>
+                            <?php } ?>
+                            <?php if ($level_information == 3) { ?>
+                                 <a href="inscription.php">
+                                     <input type="button" id="inscription" class="btn btn-primary" value="S'inscrire à ce casting">
+                                 </a>
+                            <?php } ?>
+
+                        </div>
+                    </div>      
+               </div><!--/.container-->                           
     </section><!--/#feature-->
 
     <section id="post">

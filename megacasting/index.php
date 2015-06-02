@@ -1,5 +1,14 @@
 <?php session_start(); ?>
-<?php require_once 'connexion.php'; ?>
+<?php require_once 'connexion.php'; 
+ var_dump($_SESSION);
+ 
+ if(isset($_SESSION['Auth']['level_information'])){
+    $level_information = $_SESSION['Auth']['level_information'];
+    echo $level_information;
+}else{
+    $level_information = 0;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,12 +160,19 @@
                 </div><!--/.services-->
             </div><!--/.row-->    
         </div><!--/.container-->
+        <div class="row wowload fadeInLeftBig" style="text-align: center;">
+            <?php if ($level_information == 2) { ?>
+                <a href="download.php?id=1">
+                    <input type="button" id="download_xml" class="btn btn-primary" value="Récupérer toutes les offres en XML">
+                 </a>
+            <?php } ?>   
+        </div>
     </section><!--/#feature-->
-
-    <section id="post">
+    
+    <section id="post">      
         <div class="container_post">
             <?php
-              $resultats=$bdd->query("SELECT id_offre, desc_offre, int_offre, date_offre, nom_annonceur, lib_domaine FROM offre INNER JOIN domaine ON domaine.id_domaine=offre.id_domaine INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur");
+              $resultats=$bdd->query("SELECT id_offre, desc_offre, int_offre, date_offre, nom_annonceur, lib_domaine FROM offre INNER JOIN domaine ON domaine.id_domaine=offre.id_domaine INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur WHERE validation_offre = 1");
               $resultats->setFetchMode(PDO::FETCH_OBJ);
               while( $resultat = $resultats->fetch() )
               {

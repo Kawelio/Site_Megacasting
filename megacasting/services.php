@@ -148,7 +148,7 @@
                         echo '<p>Intitulé : <input class="login_body" type="text" required="true" placeholder="Intitule" id="intitule" name="intitule"></p>';
                         echo '<p>Référence : <input class="login_body" type="text" required="true" placeholder="Reference" id="reference" name="reference"></p>';
                         echo '<p>Date : <input class="login_body" type="date" required="true" placeholder="Date" id="date" name="date"></p>';
-                        echo '<p>Durée : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>';
+                        echo '<p>Durée (jours) : <input class="login_body" type="number" required="true" placeholder="Duree" id="duree" name="duree"> jours</p>';
                         echo '<p>Date début : <input class="login_body" type="date" required="true" placeholder="Date debut" id="date_debut" name="date_debut"></p>';
                         echo '<p>Ville : <input class="login_body" type="text" required="true" placeholder="Localisation" id="localisation" name="localisation"></p>';
                         echo '<p>Description : <input class="login_body" type="text" required="true" placeholder="Description" id="description" name="description"></p>';
@@ -181,7 +181,7 @@
                             }
                             $resultats->closeCursor();                     
                         echo '</select></p>';
-                        echo "<button id='connection_services' class='btn btn-primary'>Déposer l\'offre</button>";
+                        echo "<button id='connection_services' class='btn btn-primary'>Déposer l'offre</button>";
                     }else{
                         header('Location:login.php');
                     }

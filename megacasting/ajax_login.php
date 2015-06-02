@@ -29,25 +29,55 @@ if($_POST)
 		die($output);
 	}
 	                  
-	$req_connection = $bdd->query("SELECT id_information, mail_information, password_information, validation_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
+	$req_connection = $bdd->query("SELECT id_information, mail_information, password_information, validation_information, level_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
         $req_connection->setFetchMode(PDO::FETCH_OBJ);
               while( $resultat = $req_connection->fetch() )
               {     
                 $id_information = $resultat->id_information;
+                $level_information = $resultat->level_information;
               }
     // fermeture de la requête
 	$req_connection->closeCursor();
+        
+        if($level_information == 3){
+            $req_id_artiste = $bdd->query("SELECT id_artiste FROM artiste WHERE id_information ='" . $id_information ."'");
+            $req_id_artiste->setFetchMode(PDO::FETCH_OBJ);
+              while( $resultat = $req_id_artiste->fetch() )
+              {     
+                $id_artiste = $resultat->id_artiste;              
+              }
+            // fermeture de la requête
+            $req_id_artiste->closeCursor();
+            if($req_connection->rowCount() == 1){
+            $_SESSION['Auth'] = array(
+                'login' => $login,
+                'password' => $password,
+                'id_information' => $id_information,
+                'id_artiste' => $id_artiste,
+                'level_information' => $level_information
+                );
+            $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
+                        die($output);
+            }else{
+                 $output = json_encode(array('type'=>'error', 'text' => 'Votre compte n\'est pas actif ! Verifier vos mails pour activer votre compte !'));
+                    die($output);
+            }
+            
+        }else{
+            if($req_connection->rowCount() == 1){
+                $_SESSION['Auth'] = array(
+                'login' => $login,
+                'password' => $password,
+                'id_information' => $id_information,
+                'level_information' => $level_information
+                );
+                $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
+                        die($output);
+            }else{
+                $output = json_encode(array('type'=>'error', 'text' => 'Votre compte n\'est pas actif ! Verifier vos mails pour activer votre compte !'));
+                    die($output);
+            }
+        }
 
-    if($req_connection->rowCount() == 1){
-        $_SESSION['Auth'] = array(
-        'login' => $login,
-        'password' => $password,
-        'id-information' => $id_information
-        );
-        $output = json_encode(array('type'=>'message', 'text' => 'Connexion réussi, vous allez être rediriger !'));
-		die($output);
-    }else{
-        $output = json_encode(array('type'=>'error', 'text' => 'Votre compte n\'est pas actif ! Verifier vos mails pour activer votre compte !'));
-	    die($output);
-    }
+    
 }?>

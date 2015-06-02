@@ -51,7 +51,7 @@
                         output = '<div class="success">'+response.text+'</div>';
                         //reset values in all input fields
                         $("#login  input[required=true]").val('');
-                        setTimeout("window.location.href='private.php' ", 4000);
+                        setTimeout("window.location.href='index.php' ", 2000);
                     }
                     $("#login_results").hide().html(output).slideDown();
                 }, 'json');
