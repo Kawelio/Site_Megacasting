@@ -1,131 +1,14 @@
 <liste_offre>  
     <offre> 
-        <intitule>hey</intitule> 
-        <reference>hey</reference> 
-        <date> Sun Dec 14 20:17:41 CET 2014</date>
-        <duree>3</duree> 
-        <date_debut>Sun Dec 14 20:17:41 CET 2014</date_debut> 
-        <localisation>coucou</localisation> 
-        <description>hey</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>coucou</intitule> 
-        <reference>coucou</reference> 
-        <date> Sun Dec 14 20:20:20 CET 2014</date>
-        <duree>3</duree> 
-        <date_debut>Sun Dec 14 20:20:21 CET 2014</date_debut> 
-        <localisation>coucou</localisation> 
-        <description>coucou</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>coucou2</intitule> 
-        <reference>coucou2</reference> 
-        <date> Sun Dec 14 20:20:20 CET 2014</date>
-        <duree>3</duree> 
-        <date_debut>Sun Dec 14 20:20:21 CET 2014</date_debut> 
-        <localisation>coucou2</localisation> 
-        <description>coucou2</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>hey</intitule> 
-        <reference>hey</reference> 
-        <date> Sun Dec 14 20:24:06 CET 2014</date>
-        <duree>3</duree> 
-        <date_debut>Sun Dec 14 20:24:06 CET 2014</date_debut> 
-        <localisation>hey</localisation> 
-        <description>hey</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>jiji</intitule> 
-        <reference>jiji</reference> 
-        <date> Mon Dec 15 09:17:24 CET 2014</date>
-        <duree>5</duree> 
-        <date_debut>Mon Dec 15 09:17:24 CET 2014</date_debut> 
-        <localisation>jiji</localisation> 
-        <description>jiji</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>fsdfsdf</intitule> 
-        <reference>sdfdsf</reference> 
-        <date>Tue Dec 16 12:06:19 CET 2014</date>
-        <duree>0</duree> 
-        <date_debut>Tue Dec 16 12:06:19 CET 2014</date_debut> 
-        <localisation>sdfsdf</localisation> 
-        <description>sdvdsdsg</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>sfqsqfvsqgsq</intitule> 
-        <reference>qfvqfgqs</reference> 
-        <date>Tue Dec 16 12:07:20 CET 2014</date>
-        <duree>0</duree> 
-        <date_debut>Tue Dec 16 12:07:20 CET 2014</date_debut> 
-        <localisation>qfvqdsvgqd</localisation> 
-        <description>vdqvgqdg</description> 
-        <annonceur>non je supprime rien</annonceur> 
-        <contrat>CDI</contrat>          
-        <metier>Bucheron</metier> 
-        <domaine>Chant</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>Test</intitule> 
-        <reference>456546456</reference> 
-        <date>2015-05-16</date>
-        <duree>5</duree> 
-        <date_debut>2015-05-10</date_debut> 
-        <localisation>Angers</localisation> 
-        <description>tfgsdtgsrdftgrfgyrsyryrdyryrsdy</description> 
-        <annonceur>Bernard</annonceur> 
+        <intitule>Figurant pour film</intitule> 
+        <reference>Film star wars 7 - la guerre des étoiles</reference> 
+        <date>2015-07-06</date>
+        <duree>30</duree> 
+        <date_debut>2015-07-20</date_debut> 
+        <localisation>Paris</localisation> 
+        <description>Cherche figurant pour le dernier film de la saga star wars. Homme brun, 1m70 minimum. Un contrat en CDD sera établit pour une durée de 30 jours. Le figurant ne doit pas être obligatoirement du domaine cinématographique pour postuler.</description> 
+        <annonceur>Sylvie</annonceur> 
         <contrat>CDD</contrat>          
-        <metier>Informaticien</metier> 
-        <domaine>Musicien</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>test</intitule> 
-        <reference>rfgfdghdfg</reference> 
-        <date>2015-05-09</date>
-        <duree>5</duree> 
-        <date_debut>2015-05-10</date_debut> 
-        <localisation>Angers</localisation> 
-        <description>sfgdsgshrsetges</description> 
-        <annonceur>Bernard</annonceur> 
-        <contrat>CDD</contrat>          
-        <metier>Informaticien</metier> 
-        <domaine>Musicien</domaine> 
-    </offre>  
-    <offre> 
-        <intitule>modifier</intitule> 
-        <reference>modifier</reference> 
-        <date>Mon Dec 22 10:31:00 CET 2014</date>
-        <duree>7</duree> 
-        <date_debut>Mon Dec 15 10:31:58 CET 2014</date_debut> 
-        <localisation>modifier</localisation> 
-        <description>modifier</description> 
-        <annonceur>coucou</annonceur> 
-        <contrat>Stage</contrat>          
-        <metier>Informaticien</metier> 
-        <domaine>Musicien</domaine> 
+        <metier>Figurant</metier> 
+        <domaine>Cinema</domaine> 
     </offre><liste_offre>

@@ -30,12 +30,12 @@ if($_POST)
 	}
 	                  
 	$req_connection = $bdd->query("SELECT id_information, mail_information, password_information, validation_information, level_information FROM information WHERE mail_information ='" . $login . "' AND password_information = '" .  $password . "' AND validation_information = '1'");
-        $req_connection->setFetchMode(PDO::FETCH_OBJ);
-              while( $resultat = $req_connection->fetch() )
-              {     
-                $id_information = $resultat->id_information;
-                $level_information = $resultat->level_information;
-              }
+            $req_connection->setFetchMode(PDO::FETCH_OBJ);
+                  while( $resultat = $req_connection->fetch() )
+                  {     
+                    $id_information = $resultat->id_information;
+                    $level_information = $resultat->level_information;
+                  }
     // fermeture de la requête
 	$req_connection->closeCursor();
         
