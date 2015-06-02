@@ -68,7 +68,7 @@
     </script>
 </head><!--/head-->
 
-<body class="homepage">
+<body class="homepage" onLoad="trier('1')">
     <!-- MASQUE -->
     <div id="mask"></div>
     <header id="header">
@@ -171,6 +171,7 @@
     
     <section id="post">      
         <div class="container_post">
+
             <?php
               $resultats=$bdd->query("SELECT id_offre, desc_offre, int_offre, date_offre, nom_annonceur, lib_domaine FROM offre INNER JOIN domaine ON domaine.id_domaine=offre.id_domaine INNER JOIN annonceur ON annonceur.id_annonceur=offre.id_annonceur WHERE validation_offre = 1");
               $resultats->setFetchMode(PDO::FETCH_OBJ);
@@ -182,8 +183,22 @@
               }
               $resultats->closeCursor();           
             ?>
+            </br>
+            <p>
+            <label for="tri">Trier par : </label>
+            <select id="tri" name="tri" onChange="trier(this.value)">
+                <option value="1">Tout</option>
+                <option value="2">Chanteur</option>
+                <option value="3">Danseur</option>
+                <option value="4">Chorégraphe</option>
+            </select>
+            </p>
+
+            <div id="resultat_annonce"></div>
+
         </div>
     </section><!--/#middle-->
+
     </br>
     <section id="conatcat-info">
         <div class="container">
@@ -227,5 +242,25 @@
     <script src="js/jquery.isotope.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+    <script type="text/javascript">
+    function trier(par){
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }else{
+            xhr=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+         
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                document.getElementById("resultat_annonce").innerHTML = xhr.responseText;
+            }
+        }
+         
+        par = encodeURIComponent(par);
+        xhr.open("GET","ajax_tri.php?tri="+par,true);
+        xhr.send();
+    }
+    </script>
 </body>
 </html>

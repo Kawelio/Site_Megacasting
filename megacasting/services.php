@@ -145,7 +145,6 @@
                 <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
                  <?php
                     if(Auth::islog()){
-
                         $req = $bdd->query("SELECT mail_information, password_information, level_information FROM information WHERE mail_information = '" . $_SESSION['Auth']['login'] . "' AND password_information = '" . $_SESSION['Auth']['password'] . "' AND validation_information = '1'");
                         $row = $req->fetch();
                         if($row['level_information'] == '1'){

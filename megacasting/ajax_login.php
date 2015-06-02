@@ -78,6 +78,4 @@ if($_POST)
                     die($output);
             }
         }
-
-    
 }?>

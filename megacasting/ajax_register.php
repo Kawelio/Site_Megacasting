@@ -14,7 +14,7 @@ if($_POST){
 	require_once "connexion.php";
 		
 	//Sanitize input data using PHP filter_var().
-        $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
+    $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
 	$mail		= filter_var($_POST["mail"], FILTER_SANITIZE_EMAIL);
 	$tel_fixe	= filter_var($_POST["tel_fixe"], FILTER_SANITIZE_NUMBER_INT);
 	$tel_port	= filter_var($_POST["tel_port"], FILTER_SANITIZE_NUMBER_INT);
@@ -28,7 +28,7 @@ if($_POST){
 	$token          = sha1(uniqid(rand()));
 
 	//additional php validation
-        if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //email validation
+    if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //email validation
 		$output = json_encode(array('type'=>'error', 'text' => 'Entrer un nom valide !'));
 		die($output);
 	}
@@ -60,6 +60,10 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Pays invalide !'));
 		die($output);
 	}
+	if($_POST["password"] == null){ //check emtpy message
+		$output = json_encode(array('type'=>'error', 'text' => 'Le mot de passe doit contenir 6 caractères au minimum !'));
+		die($output);
+	}
 	if($password_verif != $password){ //check emtpy message
 		$output = json_encode(array('type'=>'error', 'text' => 'La confirmation de mot de passe est invalide !'));
 		die($output);
@@ -68,6 +72,16 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Type de compte invalide !'));
 		die($output);
 	}
+
+	//Envoie mail validation
+	$to = $mail;
+	$sujet = 'Activation de votre compte';
+	$body = 'Bonjour, veuillez activer votre compte en cliquant ici -> <a href="http://localhost/megacasting/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
+	$entete = 'From : no-reply@megacasting.com' . "\r\n" .
+	'Reply-To: contact@megacasting.com' . "\r\n" .
+	'X-Mailer: PHP/' . phpversion();
+
+	mail($to,$sujet,$body,$entete);
 	                  
 	// requete sql insertion information 
 	$req = $bdd->prepare('INSERT INTO information(mail_information, tel_fixe_information, tel_port_information, rue_information, ville_information, cp_information, pays_information, password_information, level_information, token_information)
@@ -110,20 +124,6 @@ if($_POST){
 	}else{
 		$output = json_encode(array('type'=>'message', 'text' => 'Votre compte a bien été créer, vous allez recevoir une confirmation par mail !'));
 		die($output);
-
-		//Envoie mail validation
-		$to = $mail;
-		$sujet = 'Activation de votre compte';
-		$body = '
-		Bonjour, veuillez activer votre compte en cliquant ici -> 
-		<a href="http://localhost/megacasting/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
-		$entete = "MIME-Version: 1.0\r\n";
-		$entete .= "Content-type: text/html; charset=UTF-8\r\n";
-		$entete .= 'From : no-reply@megacasting.com ::' . "\r\n" .
-		'Reply-To: contact@megacasting.com' . "\r\n" .
-		'X-Mailer: PHP/' . phpversion();
-
-		mail($to,$sujet,$body,$entete);
 	}
 }
 ?>

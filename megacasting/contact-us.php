@@ -85,15 +85,15 @@
 
     <section id="contact-info">
         <div class="center">                
-            <h2>How to Reach Us?</h2>
-            <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            <h2>Vous souhaitez nous contacter ?</h2>
+            <p class="lead">Remplissez le formulaire de contact ou téléphoner nous au +0123 456 70 90</p>
         </div>
         <div class="gmap-area">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-5 text-center">
                         <div class="gmap">
-                            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=JoomShaper,+Dhaka,+Dhaka+Division,+Bangladesh&amp;aq=0&amp;oq=joomshaper&amp;sll=37.0625,-95.677068&amp;sspn=42.766543,80.332031&amp;ie=UTF8&amp;hq=JoomShaper,&amp;hnear=Dhaka,+Dhaka+Division,+Bangladesh&amp;ll=23.73854,90.385504&amp;spn=0.001515,0.002452&amp;t=m&amp;z=14&amp;iwloc=A&amp;cid=1073661719450182870&amp;output=embed"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3844.246623252889!2d-0.8118939999999832!3d48.06332501452761!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4808fd6eb25c88d3%3A0x4b22c3c90cb12a9e!2sInstitut+d&#39;Informatique+Appliqu%C3%A9e+de+Laval!5e1!3m2!1sfr!2sfr!4v1433162551796" frameborder="0" style="border:0"></iframe>
                         </div>
                     </div>
 
@@ -101,38 +101,19 @@
                         <ul class="row">
                             <li class="col-sm-6">
                                 <address>
-                                    <h5>Head Office</h5>
-                                    <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                    <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
+                                    <h5>Megaproduction</h5>
+                                    <p>101 Bd. de l'industrie<br>
+                                    Laval, 53000</p>
+                                    <p>Téléphone: +0123 456 70 90<br>
+                                    Email: megacasting@gmail.com</p>
                                 </address>
 
                                 <address>
-                                    <h5>Zonal Office</h5>
-                                    <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>                                
-                                    <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
-                                </address>
-                            </li>
-
-
-                            <li class="col-sm-6">
-                                <address>
-                                    <h5>Zone#2 Office</h5>
-                                    <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                    <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
-                                </address>
-
-                                <address>
-                                    <h5>Zone#3 Office</h5>
-                                    <p>1537 Flint Street <br>
-                                    Tumon, MP 96911</p>
-                                    <p>Phone:670-898-2847 <br>
-                                    Email Address:info@domain.com</p>
+                                    <h5>IIA</h5>
+                                    <p>5, bd de l’Industrie<br>
+                                    Saint-Berthevin, 53940</p>                                
+                                    <p>Phone: 02 43 91 47 47<br>
+                                    Email: infos@iia-laval.fr</p>
                                 </address>
                             </li>
                         </ul>
@@ -145,15 +126,15 @@
     <section id="contact-page">
         <div class="container">
             <div class="center">        
-                <h2>Drop Your Message</h2>
-                <p class="lead">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <h2>Déposez votre message</h2>
+                <p class="lead">Vous avez une question ou tout autres demandes ? Remplissez le formulaire.</p>
             </div> 
             <div class="row contact-wrap"> 
                 <div class="status alert alert-success" style="display: none"></div>
                 <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php">
                     <div class="col-sm-5 col-sm-offset-1">
                         <div class="form-group">
-                            <label>Name *</label>
+                            <label>Nom *</label>
                             <input type="text" name="name" class="form-control" required="required">
                         </div>
                         <div class="form-group">
@@ -161,17 +142,17 @@
                             <input type="email" name="email" class="form-control" required="required">
                         </div>
                         <div class="form-group">
-                            <label>Phone</label>
+                            <label>Téléphone</label>
                             <input type="number" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Company Name</label>
+                            <label>Entreprise</label>
                             <input type="text" class="form-control">
                         </div>                        
                     </div>
                     <div class="col-sm-5">
                         <div class="form-group">
-                            <label>Subject *</label>
+                            <label>Sujet *</label>
                             <input type="text" name="subject" class="form-control" required="required">
                         </div>
                         <div class="form-group">
@@ -179,7 +160,7 @@
                             <textarea name="message" id="message" required="required" class="form-control" rows="8"></textarea>
                         </div>                        
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Submit Message</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">Envoyer</button>
                         </div>
                     </div>
                 </form> 
@@ -187,84 +168,18 @@
         </div><!--/.container-->
     </section><!--/#contact-page-->
 
-    <section id="bottom">
-        <div class="container wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
-            <div class="row">
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Company</h3>
-                        <ul>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">We are hiring</a></li>
-                            <li><a href="#">Meet the team</a></li>
-                            <li><a href="#">Copyright</a></li>
-                            <li><a href="#">Terms of use</a></li>
-                            <li><a href="#">Privacy policy</a></li>
-                            <li><a href="#">Contact us</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Support</h3>
-                        <ul>
-                            <li><a href="#">Faq</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Forum</a></li>
-                            <li><a href="#">Documentation</a></li>
-                            <li><a href="#">Refund policy</a></li>
-                            <li><a href="#">Ticket system</a></li>
-                            <li><a href="#">Billing system</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Developers</h3>
-                        <ul>
-                            <li><a href="#">Web Development</a></li>
-                            <li><a href="#">SEO Marketing</a></li>
-                            <li><a href="#">Theme</a></li>
-                            <li><a href="#">Development</a></li>
-                            <li><a href="#">Email Marketing</a></li>
-                            <li><a href="#">Plugin Development</a></li>
-                            <li><a href="#">Article Writing</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-
-                <div class="col-md-3 col-sm-6">
-                    <div class="widget">
-                        <h3>Our Partners</h3>
-                        <ul>
-                            <li><a href="#">Adipisicing Elit</a></li>
-                            <li><a href="#">Eiusmod</a></li>
-                            <li><a href="#">Tempor</a></li>
-                            <li><a href="#">Veniam</a></li>
-                            <li><a href="#">Exercitation</a></li>
-                            <li><a href="#">Ullamco</a></li>
-                            <li><a href="#">Laboris</a></li>
-                        </ul>
-                    </div>    
-                </div><!--/.col-md-3-->
-            </div>
-        </div>
-    </section><!--/#bottom-->
-
     <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                    &copy; 2015 <a target="_blank" href="#" title="Megacasting, votre réussite, notre plus belle aventure">MegaCasting</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contactez nous</a></li>
                     </ul>
                 </div>
             </div>
