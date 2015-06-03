@@ -28,7 +28,7 @@ if($_POST){
 	$token          = sha1(uniqid(rand()));
 
 	//additional php validation
-    if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //email validation
+    if(!filter_var($nom, FILTER_SANITIZE_STRING)){ //nom validation
 		$output = json_encode(array('type'=>'error', 'text' => 'Entrer un nom valide !'));
 		die($output);
 	}
@@ -36,6 +36,14 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Entrer un email valide !'));
 		die($output);
 	}
+        $sql = "SELECT mail_information FROM information WHERE mail_information ='" . $mail  ."'";
+        $req = $bdd->prepare($sql);
+        $req->execute($q);
+        $count = $req->rowCount($sql);
+        if($count > 0){
+            $output = json_encode(array('type'=>'error', 'text' => 'Email déjà utilisé !'));
+            die($output);
+        }
 	if(!filter_var($tel_fixe, FILTER_SANITIZE_NUMBER_FLOAT)){ //check for valid numbers in phone number field
 		$output = json_encode(array('type'=>'error', 'text' => 'Numéro de téléphone invalide !'));
 		die($output);
@@ -82,21 +90,8 @@ if($_POST){
             $passage_ligne = "\n";
         }
  
-        //=====Déclaration des messages au format texte et au format HTML.
-        $message_txt = "Bienvenu " . $nom . ",";
-        $message_txt .= "Votre inscription à bien été enregistré au sein de notre site internet. Nous résumons toutes les données que vous avez renseignez et nous vous invitons à cliquer sur le lien de confirmation ci-dessous pour utilisez votre compte.";
-        $message_txt .= "Email :". $mail;
-        $message_txt .= "Téléphone fixe : ". $tel_fixe;
-        $message_txt .= "Téléphone portable :". $tel_port;
-        $message_txt .= "Rue :". $rue;
-        $message_txt .= "Ville :". $ville . "(" . $code . ")";
-        $message_txt .= "Pays :". $pays;
-        $message_txt .= "Mot de passe :". $password;
-        $message_txt .= "Vous devez absolument sauvegarder ce mot de passe et ne le dévoiler sous aucun prétexte.";
-        $message_txt .= "Lien de confirmation : http://megacasting.local/activate.php?token=".$token."$mail=".$to;
-        $message_txt .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.";
-        $message_txt .= "Cordialement, l'équipe MegaCasting.";                                   
-        
+        //=====Déclaration des messages au format HTML.
+                 
         $message_html = "<html><head></head><body>Bienvenu " . $nom . ",</br></br></body></html>";
         $message_html .= "Votre inscription à bien été reçu et confirmer par notre site internet. Nous résumons toutes les données que vous avez renseignez et nous vous invitons à cliquer sur le lien de confirmation ci-dessous pour utilisez votre compte.</br></br>";
         $message_html .= "Email : <b>". $mail . "</b></br>";
@@ -107,7 +102,7 @@ if($_POST){
         $message_html .= "Pays : <b>". $pays . "</b></br>";
         $message_html .= "Mot de passe <b>". $password . "</b></br></br>";
         $message_html .= "Vous devez absolument sauvegarder ce mot de passe et ne le dévoiler sous <b>aucun</b> prétexte. Il vous servira nottament pour modifier ou supprimer vos annonces postés</br></br>";
-        $message_html .= "Lien de confirmation : <a href='http://megacasting.local/activate.php?token=".$token."&mail=".$to."'>Activation du compte</a></br></br>";
+        $message_html .= "Lien de confirmation : <a href='http://megacasting.local/activate.php?token=".$token."&mail=".$mail."'>Activation du compte</a></br></br>";
         $message_html .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.</br></br>";
         $message_html .= "Cordialement, l'équipe MegaCasting.";                                   
         
