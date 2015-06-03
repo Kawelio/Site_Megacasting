@@ -14,7 +14,7 @@ if($_POST){
 	require_once "connexion.php";
 		
 	//Sanitize input data using PHP filter_var().
-    $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
+        $nom		= filter_var($_POST["nom"], FILTER_SANITIZE_STRING);
 	$mail		= filter_var($_POST["mail"], FILTER_SANITIZE_EMAIL);
 	$tel_fixe	= filter_var($_POST["tel_fixe"], FILTER_SANITIZE_NUMBER_INT);
 	$tel_port	= filter_var($_POST["tel_port"], FILTER_SANITIZE_NUMBER_INT);
@@ -72,18 +72,73 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Type de compte invalide !'));
 		die($output);
 	}
+ 
+        //=====Déclaration des messages au format texte et au format HTML.
+        $message_txt = "Bienvenu " . $nom . ",";
+        $message_txt .= "Votre inscription à bien été enregistré au sein de notre site internet. Nous résumons toutes les données que vous avez renseignez et nous vous invitons à cliquer sur le lien de confirmation ci-dessous pour utilisez votre compte.";
+        $message_txt .= "Email :". $mail;
+        $message_txt .= "Téléphone fixe : ". $tel_fixe;
+        $message_txt .= "Téléphone portable :". $tel_port;
+        $message_txt .= "Rue :". $rue;
+        $message_txt .= "Ville :". $ville . "(" . $code . ")";
+        $message_txt .= "Pays :". $pays;
+        $message_txt .= "Mot de passe :". $password;
+        $message_txt .= "Vous devez absolument sauvegarder ce mot de passe et ne le dévoiler sous aucun prétexte.";
+        $message_txt .= "Lien de confirmation : http://megacasting.local/activate.php?token=".$token."$mail=".$to;
+        $message_txt .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.";
+        $message_txt .= "Cordialement, l'équipe MegaCasting.";                                   
+        $message_html = "<html><head></head><body>Bienvenu " . $nom . ",</br></br></body></html>";
+        $message_html .= "Votre inscription à bien été reçu et confirmer par notre site internet. Nous résumons toutes les données que vous avez renseignez et nous vous invitons à cliquer sur le lien de confirmation ci-dessous pour utilisez votre compte.</br></br>";
+        $message_html .= "Email : <b>". $mail . "</b></br>";
+        $message_html .= "Téléphone fixe : <b>". $tel_fixe . "</b></br>";
+        $message_html .= "Téléphone portable : <b>". $tel_port . "</b></br>";
+        $message_html .= "Rue : <b>". $rue . "</b></br>";
+        $message_html .= "Ville : <b>". $ville . "</b>(" . $code . ")" . "</br>"; 
+        $message_html .= "Pays : <b>". $pays . "</b></br>";
+        $message_html .= "Mot de passe <b>". $password . "</b></br></br>";
+        $message_html .= "Vous devez absolument sauvegarder ce mot de passe et ne le dévoiler sous <b>aucun</b> prétexte. Il vous servira nottament pour modifier ou supprimer vos annonces postés</br></br>";
+        $message_html .= "Lien de confirmation : <a href='http://megacasting.local/activate.php?token=".$token."$mail=".$to."'>Activation du compte</a></br></br>";
+        $message_html .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.</br></br>";
+        $message_html .= "Cordialement, l'équipe MegaCasting.";                                   
+        
+        //==========
 
-	//Envoie mail validation
-	$to = $mail;
-	$sujet = 'Activation de votre compte';
-	$body = 'Bonjour, veuillez activer votre compte en cliquant ici -> <a href="http://megacasting.local/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
-	$entete = "MIME-Version: 1.0\r\n";
-	$entete .= "Content-type: text/html; charset=UTF-8\r\n";
-	$entete .= 'From : megacasting.pro@gmail.com ::' . "\r\n" .
-	'Reply-To: megacasting.pro@gmail.com' . "\r\n" .
-	'X-Mailer: PHP/' . phpversion();
-	mail($to,$sujet,$body,$entete);
-                  
+        //=====Création de la boundary
+        $boundary = "-----=".md5(rand());
+        //==========
+
+        //=====Définition du sujet.
+        $sujet = "Inscription Megacasting";
+        //=========
+
+        //=====Création du header de l'e-mail.
+        $header = "From: \"" . $nom ."\"" . $mail .$passage_ligne;
+        $header .= "Reply-to: \"MegaCasting\" <megacasting.pro@gmail.com>".$passage_ligne;
+        $header .= "MIME-Version: 1.0".$passage_ligne;
+        $header .= "Content-Type: multipart/alternative;".$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+        //==========
+
+        //=====Création du message.
+        $message = $passage_ligne."--".$boundary.$passage_ligne;
+        //=====Ajout du message au format texte.
+        $message.= "Content-Type: text/plain; charset= utf8".$passage_ligne;
+        $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+        $message.= $passage_ligne.$message_txt.$passage_ligne;
+        //==========
+        $message.= $passage_ligne."--".$boundary.$passage_ligne;
+        //=====Ajout du message au format HTML
+        $message.= "Content-Type: text/html; charset= utf8".$passage_ligne;
+        $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
+        $message.= $passage_ligne.$message_html.$passage_ligne;
+        //==========
+        $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+        $message.= $passage_ligne."--".$boundary."--".$passage_ligne;
+        //==========
+
+        //=====Envoi de l'e-mail.
+        mail($mail,$sujet,$message,$header);
+        //==========     
+           
 	// requete sql insertion information 
 	$req = $bdd->prepare('INSERT INTO information(mail_information, tel_fixe_information, tel_port_information, rue_information, ville_information, cp_information, pays_information, password_information, level_information, token_information)
 	VALUES(:mail_information,:tel_fixe_information,:tel_port_information,:rue_information,:ville_information,:cp_information,:pays_information,:password_information,:level_information,:token_information)')

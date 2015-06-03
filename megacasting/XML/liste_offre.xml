@@ -1,14 +1,66 @@
 <liste_offre>  
     <offre> 
         <intitule>Figurant pour film</intitule> 
-        <reference>Film star wars 7 - la guerre des étoiles</reference> 
+        <reference>Film star wars 7 - la guerre des etoiles</reference> 
         <date>2015-07-06</date>
         <duree>30</duree> 
         <date_debut>2015-07-20</date_debut> 
         <localisation>Paris</localisation> 
-        <description>Cherche figurant pour le dernier film de la saga star wars. Homme brun, 1m70 minimum. Un contrat en CDD sera établit pour une durée de 30 jours. Le figurant ne doit pas être obligatoirement du domaine cinématographique pour postuler.</description> 
+        <description>Cherche figurant pour le dernier film de la saga star wars. Homme brun, 1m70 minimum. Un contrat en CDD sera etablit pour une duree de 30 jours. Le figurant ne doit pas etre obligatoirement du domaine cinematographique pour postuler.</description> 
         <annonceur>Sylvie</annonceur> 
         <contrat>CDD</contrat>          
         <metier>Figurant</metier> 
         <domaine>Cinema</domaine> 
+    </offre>  
+    <offre> 
+        <intitule>Danseur representation Hip-Hop</intitule> 
+        <reference>Battle Hip-Hop World Session 2015</reference> 
+        <date>2015-07-06</date>
+        <duree>60</duree> 
+        <date_debut>2015-07-20</date_debut> 
+        <localisation>Paris</localisation> 
+        <description>Cherche danseur Hip-Hop pour representer la France a la battle de Hip-Hop mondial 2015</description> 
+        <annonceur>Sylvie</annonceur> 
+        <contrat>CDD</contrat>          
+        <metier>Danseur</metier> 
+        <domaine>Dance</domaine> 
+    </offre>  
+    <offre> 
+        <intitule>Batteur remplacant</intitule> 
+        <reference>Batteur remplacant tourn�e Johnny Hallyday</reference> 
+        <date>2015-07-06</date>
+        <duree>120</duree> 
+        <date_debut>2015-07-20</date_debut> 
+        <localisation>Paris</localisation> 
+        <description>Cherche un batteur pour accompagner Johny Hallyday dans sa grande tournee. Le batteur doit connaitre et pratiquer regulierement le rock.</description> 
+        <annonceur>Sylvie</annonceur> 
+        <contrat>CDD</contrat>          
+        <metier>Musicien</metier> 
+        <domaine>Musique</domaine> 
+    </offre>  
+    <offre> 
+        <intitule>Acteur role scapin</intitule> 
+        <reference>Piece de theatre moliere les fourberies de scapin</reference> 
+        <date>2015-07-06</date>
+        <duree>60</duree> 
+        <date_debut>2015-07-20</date_debut> 
+        <localisation>Angers</localisation> 
+        <description>Cherche un acteur pour rentrer dans le role de scapin. L'acteur ne doit pas forcement etre proffessionnel mais doit etre impliquer et pationner</description> 
+        <annonceur>Sylvie</annonceur> 
+        <contrat>CDD</contrat>          
+        <metier>Acteur</metier> 
+        <domaine>Theatre</domaine> 
+    </offre>  
+    <offre> 
+        <intitule>Assistant magicien</intitule> 
+        <reference>Spectacle de magie Eric Antoine</reference> 
+        <date>2015-07-06</date>
+        <duree>60</duree> 
+        <date_debut>2015-07-20</date_debut> 
+        <localisation>Nantes</localisation> 
+        <description>Cherche un assistant pour assister Eric Antoine durant plusieurs spectacles. Aucunes notions ne sont forcement requises.</description> 
+        <annonceur>Sylvie</annonceur> 
+        <contrat>CDD</contrat>          
+        <metier>Assistant</metier> 
+        <domaine>Spectacle</domaine> 
     </offre><liste_offre>

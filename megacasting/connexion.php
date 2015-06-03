@@ -2,7 +2,7 @@
 	// connection database
 	$serveur ='127.0.0.1';
 	$login ='root';
-	$mdp ='not24get';
+	$mdp ='';
 	$nom_bdd='megacasting';
 	try{
 		$bdd = new PDO('mysql:host='.$serveur.';dbname='.$nom_bdd.'', $login, $mdp);
