@@ -76,12 +76,11 @@ if($_POST){
 	//Envoie mail validation
 	$to = $mail;
 	$sujet = 'Activation de votre compte';
-	$body = '
-	Bonjour, veuillez activer votre compte en cliquant ici -> <a href="http://localhost/megacasting/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
+	$body = 'Bonjour, veuillez activer votre compte en cliquant ici -> <a href="http://megacasting.local/activate.php?token='.$token.'$mail='.$to.'">Activation du compte</a>';
 	$entete = "MIME-Version: 1.0\r\n";
 	$entete .= "Content-type: text/html; charset=UTF-8\r\n";
-	$entete .= 'From : no-reply@megacasting.com ::' . "\r\n" .
-	'Reply-To: contact@megacasting.com' . "\r\n" .
+	$entete .= 'From : megacasting.pro@gmail.com ::' . "\r\n" .
+	'Reply-To: megacasting.pro@gmail.com' . "\r\n" .
 	'X-Mailer: PHP/' . phpversion();
 	mail($to,$sujet,$body,$entete);
                   
@@ -91,15 +90,13 @@ if($_POST){
 	or exit(print_r($bdd->errorInfo()));
 	
 	$req->execute(array('mail_information' => $mail,'tel_fixe_information' => $tel_fixe,'tel_port_information' => $tel_port,'rue_information' => $rue,'ville_information' => $ville,'cp_information' => $code,'pays_information' => $pays,'password_information' => $password,'level_information' => $level, 'token_information' => $token));
-        $req_connection = $bdd->query("SELECT id_information FROM information WHERE mail_information ='" . $mail . "'");
-        $req_connection->setFetchMode(PDO::FETCH_OBJ);
-              while( $resultat = $req_connection->fetch() )
-              {     
-                $id_information = $resultat->id_information;
-              }
+    $req_connection = $bdd->query("SELECT id_information FROM information WHERE mail_information ='" . $mail . "'");
+    $req_connection->setFetchMode(PDO::FETCH_OBJ);
+    while( $resultat = $req_connection->fetch()){     
+        $id_information = $resultat->id_information;
+    }
 	$req->closeCursor();
-        
-        
+             
         // requete sql insertion annonceur 
         if ($level == 1 ){
             $req_insert_annonceur = $bdd->prepare('INSERT INTO annonceur(nom_annonceur, id_information)VALUES(:nom_annonceur,:id_information)')
