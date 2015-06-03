@@ -86,10 +86,7 @@
                                 }
                             ?>
                             <div class="search">
-                                <form role="form">
-                                    <input type="text" name="search" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true">
-                                    <input type="button" id="search_index" class="fa fa-search">
-                                </form>
+                                <input type="text" name="search" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true" onchange="search(this.value)">
                            </div>
                         </div>
                     </div>
@@ -244,6 +241,24 @@
          
         par = encodeURIComponent(par);
         xhr.open("GET","ajax_tri.php?tri="+par,true);
+        xhr.send();
+    }
+    function search(par){
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr=new XMLHttpRequest();
+        }else{
+            xhr=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+         
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4 && xhr.status==200){
+                document.getElementById("resultat_annonce").innerHTML = xhr.responseText;
+            }
+        }
+         
+        par = encodeURIComponent(par);
+        xhr.open("GET","ajax_search.php?search="+par,true);
         xhr.send();
     }
     </script>
