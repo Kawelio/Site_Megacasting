@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Blog Single | Corlate</title>
+    <title>Megacasting | Contact</title>
     
     <!-- core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,6 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Accueil</a></li>
-                        <li><a href="about-us.php">A propos</a></li>
                         <li><a href="services.php">Services</a></li>
                         <li class="active"><a href="contact-us.php">Contact</a></li>                        
                     </ul>

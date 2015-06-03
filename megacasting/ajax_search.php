@@ -23,7 +23,7 @@ if($_POST){
 	$type_contrat		= filter_var($_POST["type_contrat"], FILTER_SANITIZE_STRING);
 	$metier         	= filter_var($_POST["metier"], FILTER_SANITIZE_STRING);
 	$domaine		= filter_var($_POST["domaine"], FILTER_SANITIZE_STRING);
-        $description            = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
+    $description            = filter_var($_POST["description"], FILTER_SANITIZE_STRING);
 
 	//additional php validation
 	if(!filter_var($intitule, FILTER_SANITIZE_STRING)){ //email validation

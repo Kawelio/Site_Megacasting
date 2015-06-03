@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
--- Client :  127.0.0.1
--- Généré le :  Mar 02 Juin 2015 à 14:08
--- Version du serveur :  5.6.17
--- Version de PHP :  5.5.12
+-- Client: localhost
+-- Généré le: Mer 03 Juin 2015 à 09:57
+-- Version du serveur: 5.6.12-log
+-- Version de PHP: 5.4.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de données :  `megacasting`
+-- Base de données: `megacasting`
 --
+CREATE DATABASE IF NOT EXISTS `megacasting` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `megacasting`;
 
 -- --------------------------------------------------------
 
@@ -32,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `annonceur` (
   `id_information` int(11) NOT NULL,
   PRIMARY KEY (`id_annonceur`),
   KEY `id_information` (`id_information`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `annonceur`
@@ -53,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `artiste` (
   `id_information` int(11) NOT NULL,
   PRIMARY KEY (`id_artiste`),
   KEY `id_information` (`id_information`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `artiste`
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `diffuseur` (
   `id_information` int(11) NOT NULL,
   PRIMARY KEY (`id_diffuseur`),
   KEY `id_information` (`id_information`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Contenu de la table `diffuseur`
@@ -155,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `domaine` (
   `id_domaine` int(11) NOT NULL AUTO_INCREMENT,
   `lib_domaine` varchar(50) NOT NULL,
   PRIMARY KEY (`id_domaine`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `domaine`
@@ -231,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `metier` (
   `id_metier` int(11) NOT NULL AUTO_INCREMENT,
   `lib_metier` varchar(70) NOT NULL,
   PRIMARY KEY (`id_metier`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Contenu de la table `metier`
@@ -247,7 +249,9 @@ INSERT INTO `metier` (`id_metier`, `lib_metier`) VALUES
 (11, 'Cadreur'),
 (12, 'Metteur en scene'),
 (13, 'Figurant'),
-(14, 'Artiste de cirque');
+(14, 'Artiste de cirque'),
+(15, 'Danseur'),
+(17, 'Assistant');
 
 -- --------------------------------------------------------
 
@@ -276,14 +280,18 @@ CREATE TABLE IF NOT EXISTS `offre` (
   KEY `id_metier` (`id_metier`),
   KEY `id_domaine` (`id_domaine`),
   KEY `id_media` (`id_media`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Contenu de la table `offre`
 --
 
 INSERT INTO `offre` (`id_offre`, `int_offre`, `ref_offre`, `date_offre`, `duree_offre`, `date_deb_offre`, `loc_offre`, `desc_offre`, `validation_offre`, `id_annonceur`, `id_contrat`, `id_metier`, `id_domaine`, `id_media`) VALUES
-(12, 'Figurant pour film', 'Film star wars 7 - la guerre des Ã©toiles', '2015-07-06', 30, '2015-07-20', 'Paris', 'Cherche figurant pour le dernier film de la saga star wars. Homme brun, 1m70 minimum. Un contrat en CDD sera Ã©tablit pour une durÃ©e de 30 jours. Le figurant ne doit pas Ãªtre obligatoirement du domaine cinÃ©matographique pour postuler.', 1, 1, 2, 13, 2, NULL);
+(12, 'Figurant pour film', 'Film star wars 7 - la guerre des etoiles', '2015-07-06', 30, '2015-07-20', 'Paris', 'Cherche figurant pour le dernier film de la saga star wars. Homme brun, 1m70 minimum. Un contrat en CDD sera etablit pour une duree de 30 jours. Le figurant ne doit pas etre obligatoirement du domaine cinematographique pour postuler.', 1, 1, 2, 13, 2, NULL),
+(13, 'Danseur representation Hip-Hop', 'Battle Hip-Hop World Session 2015', '2015-07-06', 60, '2015-07-20', 'Paris', 'Cherche danseur Hip-Hop pour representer la France a la battle de Hip-Hop mondial 2015', 1, 1, 2, 15, 4, NULL),
+(14, 'Batteur remplacant', 'Batteur remplacant tournée Johnny Hallyday', '2015-07-06', 120, '2015-07-20', 'Paris', 'Cherche un batteur pour accompagner Johny Hallyday dans sa grande tournee. Le batteur doit connaitre et pratiquer regulierement le rock.', 1, 1, 2, 6, 1, NULL),
+(15, 'Acteur role scapin', 'Piece de theatre moliere les fourberies de scapin', '2015-07-06', 60, '2015-07-20', 'Angers', 'Cherche un acteur pour rentrer dans le role de scapin. L''acteur ne doit pas forcement etre proffessionnel mais doit etre impliquer et pationner', 1, 1, 2, 10, 3, NULL),
+(16, 'Assistant magicien', 'Spectacle de magie Eric Antoine', '2015-07-06', 60, '2015-07-20', 'Nantes', 'Cherche un assistant pour assister Eric Antoine durant plusieurs spectacles. Aucunes notions ne sont forcement requises.', 1, 1, 2, 17, 5, NULL);
 
 -- --------------------------------------------------------
 

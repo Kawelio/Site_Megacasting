@@ -1,10 +1,7 @@
 <?php session_start(); ?>
 <?php require_once 'connexion.php'; 
- var_dump($_SESSION);
- 
  if(isset($_SESSION['Auth']['level_information'])){
     $level_information = $_SESSION['Auth']['level_information'];
-    echo $level_information;
 }else{
     $level_information = 0;
 }
@@ -90,7 +87,7 @@
                             ?>
                             <div class="search">
                                 <form role="form">
-                                    <input type="text" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true">
+                                    <input type="text" name="search" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true">
                                     <input type="button" id="search_index" class="fa fa-search">
                                 </form>
                            </div>
@@ -115,7 +112,6 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">Accueil</a></li>
-                        <li><a href="about-us.php">A propos</a></li>
                         <li><a href="services.php">Services</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
@@ -171,12 +167,15 @@
     
     <section id="post">      
         <div class="container_post">
-            <label for="tri">Trier par : </label>
+        	</br>
+            <label for="tri">Trier les castings par : </label>
             <select id="tri" name="tri" onChange="trier(this.value)">
                 <option value="1">Tout</option>
-                <option value="2">Chanteur</option>
-                <option value="3">Danseur</option>
-                <option value="4">Chorégraphe</option>
+                <option value="2">Musique</option>
+                <option value="3">Cinéma</option>
+                <option value="4">Théâtre</option>
+                <option value="5">Dance</option>
+                <option value="6">Spectacle</option>
             </select>
             </p>
 

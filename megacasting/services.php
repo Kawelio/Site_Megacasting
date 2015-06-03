@@ -125,7 +125,6 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Accueil</a></li>
-                        <li><a href="about-us.php">A propos</a></li>
                         <li class="active"><a href="services.php">Services</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
@@ -202,20 +201,19 @@
         <div id="results"></div>
         <br/>
     </div>
-
-
+    
     <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                    &copy; 2015 <a target="_blank" href="#" title="Megacasting, votre réussite, notre plus belle aventure">MegaCasting</a>. All Rights Reserved.
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Faq</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">A propos</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contactez nous</a></li>
                     </ul>
                 </div>
             </div>

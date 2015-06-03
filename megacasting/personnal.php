@@ -2,7 +2,6 @@
 <?php require_once 'connexion.php'; 
 if(isset($_SESSION['Auth']['level_information'])){
     $level_information = $_SESSION['Auth']['level_information'];
-    echo $level_information;
 }else{
     $level_information = 0;
 }
@@ -89,7 +88,6 @@ if(isset($_SESSION['Auth']['level_information'])){
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">Accueil</a></li>
-                        <li><a href="about-us.php">A propos</a></li>
                         <li><a href="services.php">Services</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
@@ -136,7 +134,6 @@ if(isset($_SESSION['Auth']['level_information'])){
                       'metier' => $metier
                   );
             ?>  
-            ?>
                   <div class='container_annonce'>
                        <section id="feature" >
                             <div class="container">
