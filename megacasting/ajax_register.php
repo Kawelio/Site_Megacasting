@@ -36,11 +36,9 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Entrer un email valide !'));
 		die($output);
 	}
-        $sql = "SELECT mail_information FROM information WHERE mail_information ='" . $mail  ."'";
-        $req = $bdd->prepare($sql);
-        $req->execute($q);
-        $count = $req->rowCount($sql);
-        if($count > 0){
+        $req =$bdd->query("SELECT mail_information FROM information WHERE mail_information ='" . $mail  ."'"); 
+        $req->setFetchMode(PDO::FETCH_OBJ);
+        if($req->rowCount() > 0){
             $output = json_encode(array('type'=>'error', 'text' => 'Email déjà utilisé !'));
             die($output);
         }
