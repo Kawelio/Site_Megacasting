@@ -1,38 +1,5 @@
 <?php
 require_once 'connexion.php';
-$token = $_GET['token'];
-$mail = $_GET['mail'];
-if(!empty($_GET)){
-    $q = array('mail' => $mail, 'token' => $token);
-    $sql = 'SELECT token_information, mail_information FROM information WHERE mail_information = :mail AND token_information = :token';
-    $req = $bdd->prepare($sql);
-    $req->execute($q);
-    $count = $req->rowCount($sql);
-    if($count == 1){
-        $v = array('mail' => $mail, 'validation' => '1');
-        //Verifier si l'utilisateur est actif
-        $sql = 'SELECT token_information, validation_information FROM information WHERE mail_information = :mail AND validation_information = :validation';
-        $req = $bdd->prepare($sql);
-        $req->execute($v);
-        $dejactif = $req->rowCount($sql);
-        if($dejactif == 1){
-            $output = json_encode(array('type'=>'error', 'text' => 'Utilisateur déjà actif !'));
-            die($output);
-        } else {
-            //Sinon on active l'utilisateur
-            $u = array('mail' => $mail, 'validation' => '1');
-            $sql = 'UPDATE information SET validation_information = :validation WHERE mail_information = :mail';
-            $req = $bdd->prepare($sql);
-            $req->execute($u);
-            $output = json_encode(array('type'=>'message', 'text' => 'Votre compte est desormais actif !'));
-            die($output);
-        }
-    } else {
-        //Utilisateur inconnu
-        $output = json_encode(array('type'=>'error', 'text' => 'Mauvais token !'));
-        die($output);
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -120,21 +87,42 @@ if(!empty($_GET)){
     </header><!--/header-->
 
     <div id="login" class="spacer form-style">
-        <div class="container contactform center" id="contact_body">
-        <h2 class="text-center wowload fadeInUp title_b">Se connecter</h2>
-        <div id="login_body" class="row wowload fadeInLeftBig">      
-          <div class="col-sm-6 col-sm-offset-3 col-xs-12">  
-            <input class="login_body" type="text" required="true" placeholder="Identifiant" id="login" name="login">
-            <input class="login_body" type="password" required="true" placeholder="Password" id="password" name="password">
-            <a href="register.php">Vous n'êtes pas encore inscrit ?</a><br/>
-            <a href="wrong.php">Vous avez oubliez votre mot de passe ?</a><br/>
-            <button id="connection_login" class="btn btn-primary"><i class="fa fa-paper-plane"></i> Se connecter</button>
-            <br><br><?php var_dump($_SESSION['user']); ?>
-          </div>
+        <div class="center">
+        <h2>Activation de votre compte</h2>
+        <?php
+        	$token = $_GET['token'];
+			$mail = $_GET['mail'];
+			if(!empty($_GET)){
+			    $q = array('mail' => $mail, 'token' => $token);
+			    $sql = 'SELECT token_information, mail_information FROM information WHERE mail_information = :mail AND token_information = :token';
+			    $req = $bdd->prepare($sql);
+			    $req->execute($q);
+			    $count = $req->rowCount($sql);
+			    if($count == 1){
+			        $v = array('mail' => $mail, 'validation' => '1');
+			        //Verifier si l'utilisateur est actif
+			        $sql = 'SELECT token_information, validation_information FROM information WHERE mail_information = :mail AND validation_information = :validation';
+			        $req = $bdd->prepare($sql);
+			        $req->execute($v);
+			        $dejactif = $req->rowCount($sql);
+			        if($dejactif == 1){
+			            echo 'Utilisateur déjà actif !';
+			        } else {
+			            //Sinon on active l'utilisateur
+			            $u = array('mail' => $mail, 'validation' => '1');
+			            $sql = 'UPDATE information SET validation_information = :validation WHERE mail_information = :mail';
+			            $req = $bdd->prepare($sql);
+			            $req->execute($u);
+			            echo 'Votre compte est desormais actif !';
+			        }
+			    } else {
+			       echo 'La validation a échoué, le token est invalide !';
+			    }
+			}
+		?>
         </div>
-      </div>
-      <br/>
-      <div id="login_results"></div>
+    </div>
+    <br/>
     </div>
 <!--Contact Ends-->
 
