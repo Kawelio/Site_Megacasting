@@ -72,6 +72,15 @@ if($_POST){
 		$output = json_encode(array('type'=>'error', 'text' => 'Type de compte invalide !'));
 		die($output);
 	}
+        
+        if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn|gmail).[a-z]{2,4}$#", $mail)) // On filtre les serveurs qui rencontrent des bogues.
+        {
+            $passage_ligne = "\r\n";
+        }
+        else
+        {
+            $passage_ligne = "\n";
+        }
  
         //=====Déclaration des messages au format texte et au format HTML.
         $message_txt = "Bienvenu " . $nom . ",";
@@ -87,6 +96,7 @@ if($_POST){
         $message_txt .= "Lien de confirmation : http://megacasting.local/activate.php?token=".$token."$mail=".$to;
         $message_txt .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.";
         $message_txt .= "Cordialement, l'équipe MegaCasting.";                                   
+        
         $message_html = "<html><head></head><body>Bienvenu " . $nom . ",</br></br></body></html>";
         $message_html .= "Votre inscription à bien été reçu et confirmer par notre site internet. Nous résumons toutes les données que vous avez renseignez et nous vous invitons à cliquer sur le lien de confirmation ci-dessous pour utilisez votre compte.</br></br>";
         $message_html .= "Email : <b>". $mail . "</b></br>";
@@ -97,7 +107,7 @@ if($_POST){
         $message_html .= "Pays : <b>". $pays . "</b></br>";
         $message_html .= "Mot de passe <b>". $password . "</b></br></br>";
         $message_html .= "Vous devez absolument sauvegarder ce mot de passe et ne le dévoiler sous <b>aucun</b> prétexte. Il vous servira nottament pour modifier ou supprimer vos annonces postés</br></br>";
-        $message_html .= "Lien de confirmation : <a href='http://megacasting.local/activate.php?token=".$token."$mail=".$to."'>Activation du compte</a></br></br>";
+        $message_html .= "Lien de confirmation : <a href='http://megacasting.local/activate.php?token=".$token."&mail=".$to."'>Activation du compte</a></br></br>";
         $message_html .= " Ce mail est envoyer automatiquement à chaque inscription, merci de ne pas y répondre.</br></br>";
         $message_html .= "Cordialement, l'équipe MegaCasting.";                                   
         
@@ -120,10 +130,7 @@ if($_POST){
 
         //=====Création du message.
         $message = $passage_ligne."--".$boundary.$passage_ligne;
-        //=====Ajout du message au format texte.
-        $message.= "Content-Type: text/plain; charset= utf8".$passage_ligne;
-        $message.= "Content-Transfer-Encoding: 8bit".$passage_ligne;
-        $message.= $passage_ligne.$message_txt.$passage_ligne;
+
         //==========
         $message.= $passage_ligne."--".$boundary.$passage_ligne;
         //=====Ajout du message au format HTML
