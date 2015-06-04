@@ -230,10 +230,12 @@ ul.social-share li a:hover {
 }
 
 input.search-form{
-  background: transparent;
-  border: 0 none;
+  background: rgba(255, 255, 255, 0);
+  border: 2px solid white;
+  border-radius: 4px;
   width: 60px;
   padding: 0 10px;
+  margin-left: 10px;
   color: #FFF;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;

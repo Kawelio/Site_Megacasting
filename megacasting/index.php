@@ -87,6 +87,7 @@
                             ?>
                             <div class="search">
                                 <input type="text" name="search" class="search-form" id="search" autocomplete="off" placeholder="Search" required="true" onchange="search(this.value)">
+                                <i class="fa fa-search"></i>
                            </div>
                         </div>
                     </div>
@@ -109,7 +110,7 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">Accueil</a></li>
-                        <li><a href="services.php">Services</a></li>
+                        <li><a href="services.php">Déposer offre</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>
@@ -146,7 +147,7 @@
                     <div class="col-md-4 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
                         <div class="feature-wrap">
                             <i class="fa fa-cogs"></i>
-                            <h2>Customisation personnalisé</h2>
+                            <h2>Services personnalisés</h2>
                             <h3>Profitez d'une expérience intuitive</h3>
                         </div>
                     </div><!--/.col-md-4-->
@@ -208,10 +209,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">A propos</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contactez nous</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="contact-us.php">Contactez nous</a></li>
                     </ul>
                 </div>
             </div>

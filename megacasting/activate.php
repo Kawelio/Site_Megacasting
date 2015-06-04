@@ -48,13 +48,7 @@ require_once 'connexion.php';
                                 }else{
                                     echo '<a href="login.php">Se connecter</a>';
                                 }
-                            ?>
-                            <div class="search">
-                                <form role="form">
-                                    <input type="text" class="search-form" autocomplete="off" placeholder="Search">
-                                    <i class="fa fa-search"></i>
-                                </form>
-                           </div>
+                            ?>                            
                         </div>
                     </div>
                 </div>
@@ -134,10 +128,8 @@ require_once 'connexion.php';
                 </div>
                 <div class="col-sm-6">
                     <ul class="pull-right">
-                        <li><a href="#">Accueil</a></li>
-                        <li><a href="#">A propos</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Contactez nous</a></li>
+                        <li><a href="index.php">Accueil</a></li>
+                        <li><a href="contact-us.php">Contactez nous</a></li>
                     </ul>
                 </div>
             </div>
