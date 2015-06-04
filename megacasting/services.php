@@ -119,7 +119,7 @@
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">Accueil</a></li>
-                        <li class="active"><a href="services.php">Services</a></li>
+                        <li class="active"><a href="services.php">Déposer offre</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>

@@ -82,7 +82,7 @@ if(isset($_SESSION['Auth']['level_information'])){
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="index.php">Accueil</a></li>
-                        <li><a href="services.php">Services</a></li>
+                        <li><a href="services.php">Déposer offre</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>

@@ -60,20 +60,8 @@
                 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about-us.php">About Us</a></li>
-                        <li><a href="services.php">Services</a></li>
-                        <li><a href="portfolio.php">Portfolio</a></li>
-                        <li class="dropdown active">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="blog-item.php">Blog Single</a></li>
-                                <li><a href="pricing.php">Pricing</a></li>
-                                <li class="active"><a href="404.php">404</a></li>
-                                <li><a href="shortcodes.php">Shortcodes</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="blog.php">Blog</a></li> 
+                        <li><a href="index.php">Accueil</a></li>
+                        <li class="active"><a href="services.php">Déposer offre</a></li>
                         <li><a href="contact-us.php">Contact</a></li>                        
                     </ul>
                 </div>

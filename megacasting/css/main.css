@@ -2644,7 +2644,9 @@ shortcodes page css
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#db3615',GradientType=0 ); /* IE6-9 */
  }
 
-
+ .socia a{
+     font-size: 20px;
+ }
 
 
 
