@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+?>
 <?php require_once 'connexion.php'; 
  if(isset($_SESSION['Auth']['level_information'])){
     $level_information = $_SESSION['Auth']['level_information'];
